@@ -11,16 +11,19 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ProfileIcon } from "./profile-icon";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { LogOut, MoonIcon, SunIcon } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
-export const ProfileMenu = () => {
+export const UserMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <ProfileIcon />
+        <Avatar className="cursor-pointer">
+          <AvatarImage src="https://avatars.githubusercontent.com/u/178677917?v=4" />
+          <AvatarFallback>User picture</AvatarFallback>
+        </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>

@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
-export const ProfileIcon = () => {
+const UserMenuIcon = () => {
   return (
     <Avatar className="cursor-pointer">
       <AvatarImage src="https://avatars.githubusercontent.com/u/178677917?v=4" />
@@ -8,3 +8,5 @@ export const ProfileIcon = () => {
     </Avatar>
   );
 };
+
+export default UserMenuIcon;

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import { NavBar } from "@/components/navbar/navbar";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -18,11 +17,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="dark scroll-smooth">
       <body
         className={`${roboto.className} bg-[#EAEDF0] antialiased dark:bg-[#0F1215]`}
       >
-        <NavBar />
         {children}
       </body>
     </html>

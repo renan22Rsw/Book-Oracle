@@ -2,18 +2,18 @@ export const navbarItems = [
   {
     id: 1,
     item: "Home",
-    href: "#",
+    href: "/",
   },
 
   {
     id: 2,
     item: "About us",
-    href: "#about-us",
+    href: "/about-us",
   },
 
   {
     id: 3,
     item: "Books",
-    href: "#",
+    href: "/books",
   },
 ];
