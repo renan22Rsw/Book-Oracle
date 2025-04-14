@@ -61,6 +61,19 @@ const config: Config = {
         DEFAULT: "6px 4px 4px rgba(0, 0, 0, 0.25)",
       },
     },
+    keyframes: {
+      "fada-in": {
+        "0%": {
+          opacity: "0",
+        },
+        "100%": {
+          opacity: "1",
+        },
+      },
+    },
+    animation: {
+      "fade-in": "fada-in 2s ease-in-out",
+    },
   },
 
   plugins: [

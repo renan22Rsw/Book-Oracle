@@ -19,7 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${roboto.className} bg-[#FFE1C8] antialiased`}>
+      <body
+        className={`${roboto.className} bg-[#EAEDF0] antialiased dark:bg-[#0F1215]`}
+      >
         <NavBar />
         {children}
       </body>
