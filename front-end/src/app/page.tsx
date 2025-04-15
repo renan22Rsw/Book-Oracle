@@ -1,25 +1,9 @@
 "use client";
 
-import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { HomePage } from "./_components/home/home-page";
-import { HomePageMobile } from "./_components/home/home-page-mobile";
-import { NavBar } from "@/components/navbar/navbar";
+import { redirect } from "next/navigation";
 
 const Home = () => {
-  const isMobile = useMediaQuery("(max-width: 1024px)");
-
-  return (
-    <>
-      {isMobile ? (
-        <HomePageMobile />
-      ) : (
-        <>
-          <NavBar />
-          <HomePage />
-        </>
-      )}
-    </>
-  );
+  redirect("/home");
 };
 
 export default Home;

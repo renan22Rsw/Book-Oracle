@@ -19,7 +19,7 @@ import UserMenuIcon from "../user-menu/user-icon";
 export const AppSideBar = () => {
   return (
     <Sidebar>
-      <SidebarContent className="bg-[#b6b9bc] dark:bg-[#373a3d]">
+      <SidebarContent className="bg-[#E1E5E8] dark:bg-[#171B1E]">
         <SidebarGroup>
           <SidebarGroupLabel className="py-10">Book Oracle</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -38,7 +38,7 @@ export const AppSideBar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="bg-[#b6b9bc] dark:bg-[#373a3d]">
+      <SidebarFooter className="bg-[#E1E5E8] dark:bg-[#171B1E]">
         <div className="px-2">
           <div className="flex items-center gap-x-2">
             <UserMenuIcon />
@@ -47,12 +47,12 @@ export const AppSideBar = () => {
           <span className="font-light italic">example.gmail.com</span>
         </div>
         <div className="flex items-center gap-5">
-          <Button>
-            <SunIcon />
+          <Button className="w-[100px] bg-[#CFD1EC] dark:bg-[#1D2B72]">
+            <SunIcon className="text-black dark:text-white" />
           </Button>
 
-          <Button>
-            <MoonIcon />
+          <Button className="w-[100px] bg-[#CFD1EC] dark:bg-[#1D2B72]">
+            <MoonIcon className="text-black dark:text-white" />
           </Button>
         </div>
 

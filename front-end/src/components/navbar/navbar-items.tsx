@@ -2,7 +2,7 @@ export const navbarItems = [
   {
     id: 1,
     item: "Home",
-    href: "/",
+    href: "/home",
   },
 
   {
@@ -14,6 +14,6 @@ export const navbarItems = [
   {
     id: 3,
     item: "Books",
-    href: "/books",
+    href: "oracle/books",
   },
 ];

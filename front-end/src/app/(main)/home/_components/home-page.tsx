@@ -27,7 +27,7 @@ export const HomePage = () => {
           possa descrever.
         </p>
 
-        <Link href={"/books"}>
+        <Link href={"/oracle/books"}>
           <button className="h-10 w-[150px] rounded-sm bg-[#CFD1EC] font-bold text-[#141515] duration-300 ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-[#ad9bbe] dark:bg-[#1D2B72] dark:text-[#EAEBEB] dark:hover:shadow-[#0077ba]">
             Começar
           </button>

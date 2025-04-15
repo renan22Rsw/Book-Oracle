@@ -1,9 +1,9 @@
 import {
   HomeIcon,
   PersonIcon,
-  ReaderIcon,
   GearIcon,
   ClipboardIcon,
+  MagnifyingGlassIcon,
 } from "@radix-ui/react-icons";
 
 interface sideBarItemsTypes {
@@ -17,7 +17,7 @@ export const sideBarItemns: sideBarItemsTypes[] = [
   {
     id: 1,
     item: "Home",
-    href: "/",
+    href: "/home",
     icon: <HomeIcon />,
   },
 
@@ -30,22 +30,22 @@ export const sideBarItemns: sideBarItemsTypes[] = [
 
   {
     id: 3,
-    item: "Books",
-    href: "/books",
-    icon: <ReaderIcon />,
+    item: "Ask the Oracle",
+    href: "/oracle/books",
+    icon: <MagnifyingGlassIcon />,
   },
 
   {
     id: 4,
     item: "My list",
-    href: "#",
+    href: "/oracle/list",
     icon: <ClipboardIcon />,
   },
 
   {
     id: 5,
     item: "Settings",
-    href: "#",
+    href: "/oracle/settings",
     icon: <GearIcon />,
   },
 ];
