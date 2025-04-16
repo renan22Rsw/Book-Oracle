@@ -14,19 +14,29 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       {isMobile ? (
-        <>
-          <SidebarProvider>
-            <AppSideBar />
-            <main>
-              <SideBarIcon />
-              {children}
-            </main>
-          </SidebarProvider>
-        </>
+        <SidebarProvider>
+          <AppSideBar />
+          <main>
+            <SideBarIcon />
+            {children}
+          </main>
+        </SidebarProvider>
       ) : (
         <>
-          {pathName.includes("oracle") ? "" : <NavBar />}
-          <main>{children}</main>
+          {pathName.includes("/oracle") ? (
+            <SidebarProvider>
+              <AppSideBar />
+              <main>
+                <SideBarIcon />
+                {children}
+              </main>
+            </SidebarProvider>
+          ) : (
+            <main>
+              <NavBar />
+              {children}
+            </main>
+          )}
         </>
       )}
     </>
