@@ -1,0 +1,118 @@
+"use client";
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { signInSchema } from "@/schema/authSchemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+import AuthButton from "../../_components/auth-button";
+
+export const SignInForm = () => {
+  const signInForm = useForm<z.infer<typeof signInSchema>>({
+    resolver: zodResolver(signInSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const onSubmit = (values: z.infer<typeof signInSchema>) => {
+    console.log(values);
+  };
+
+  return (
+    <Form {...signInForm}>
+      <form onSubmit={signInForm.handleSubmit(onSubmit)} className="space-y-4">
+        <FormField
+          control={signInForm.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Nome de usuário</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="exemplo"
+                  className="bg-[#eaedf0] placeholder:italic dark:bg-[#0F1215]"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={signInForm.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input
+                  type="email"
+                  placeholder="exemplo@gmail.com"
+                  {...field}
+                  className="bg-[#eaedf0] placeholder:italic dark:bg-[#0F1215]"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={signInForm.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Senha</FormLabel>
+              <FormControl>
+                <Input
+                  type="password"
+                  placeholder="********"
+                  {...field}
+                  className="bg-[#eaedf0] placeholder:italic dark:bg-[#0F1215]"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={signInForm.control}
+          name="confirmPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Confirme sua Senha</FormLabel>
+              <FormControl>
+                <Input
+                  type="password"
+                  placeholder="********"
+                  {...field}
+                  className="bg-[#eaedf0] placeholder:italic dark:bg-[#0F1215]"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <div className="flex items-center justify-center">
+          <AuthButton label="Cadastrar" />
+        </div>
+      </form>
+    </Form>
+  );
+};
