@@ -56,7 +56,7 @@ export const LoginForm = () => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Senha</FormLabel>
+              <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input
                   type="password"
@@ -71,7 +71,7 @@ export const LoginForm = () => {
         />
 
         <div className="flex items-center justify-center">
-          <AuthButton label="Logar" />
+          <AuthButton label="Login" />
         </div>
       </form>
     </Form>

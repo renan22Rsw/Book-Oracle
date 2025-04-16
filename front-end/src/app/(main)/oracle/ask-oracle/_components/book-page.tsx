@@ -40,7 +40,9 @@ export const AskOraclePage = () => {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Your book description</FormLabel>
+                <FormLabel className="text-[#0f1215] dark:text-[#eaedf0]">
+                  Your book description
+                </FormLabel>
                 <FormControl>
                   <Input
                     className="w-[320px] placeholder:italic lg:w-[500px]"

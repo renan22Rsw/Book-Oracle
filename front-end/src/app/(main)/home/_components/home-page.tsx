@@ -17,19 +17,21 @@ export const HomePage = () => {
     <div className="flex h-screen animate-fade-in">
       <div className="flex h-[400px] flex-col justify-center space-y-4 px-8">
         <h1
-          className={`${firaSans.className} text-8xl text-[#141515] text-shadow dark:text-[#EAEBEB] sm:text-6xl`}
+          className={`${firaSans.className} text-8xl text-[#0f1215] text-shadow dark:text-[#eaedf0] sm:text-6xl`}
         >
           Book{" "}
           <span className="text-[#62EFBE] dark:text-[#109E6C]">Oracle</span>
         </h1>
-        <p className={`${firaSansCondensed.className} w-[694px] text-4xl`}>
-          A melhor plataforma para você que procura o melhor livro que você
-          possa descrever.
+        <p
+          className={`${firaSansCondensed.className} w-[694px] text-4xl text-[#0f1215] dark:text-[#eaedf0]`}
+        >
+          The ultimate platform for finding the perfect book that fits your
+          imagination.
         </p>
 
-        <Link href={"/oracle/books"}>
-          <button className="h-10 w-[150px] rounded-sm bg-[#CFD1EC] font-bold text-[#141515] duration-300 ease-in-out hover:scale-110 hover:shadow-lg hover:shadow-[#ad9bbe] dark:bg-[#1D2B72] dark:text-[#EAEBEB] dark:hover:shadow-[#0077ba]">
-            Começar
+        <Link href={"/oracle/ask-oracle"}>
+          <button className="h-10 w-[150px] rounded-sm bg-[#3f4e5a] font-bold text-[#eaedf0] duration-300 ease-in-out hover:-translate-y-2 hover:shadow-lg hover:shadow-[#3f4e5a] dark:bg-[#a5b4c0] dark:text-[#0f1215] dark:hover:shadow-[#a5b4c0]">
+            Get Started
           </button>
         </Link>
       </div>

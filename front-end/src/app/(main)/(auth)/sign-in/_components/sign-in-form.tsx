@@ -39,7 +39,7 @@ export const SignInForm = () => {
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nome de usuário</FormLabel>
+              <FormLabel>Username</FormLabel>
               <FormControl>
                 <Input
                   placeholder="exemplo"
@@ -76,7 +76,7 @@ export const SignInForm = () => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Senha</FormLabel>
+              <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input
                   type="password"
@@ -95,7 +95,7 @@ export const SignInForm = () => {
           name="confirmPassword"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Confirme sua Senha</FormLabel>
+              <FormLabel>Confirm your password</FormLabel>
               <FormControl>
                 <Input
                   type="password"
@@ -110,7 +110,7 @@ export const SignInForm = () => {
         />
 
         <div className="flex items-center justify-center">
-          <AuthButton label="Cadastrar" />
+          <AuthButton label="Sign up" />
         </div>
       </form>
     </Form>

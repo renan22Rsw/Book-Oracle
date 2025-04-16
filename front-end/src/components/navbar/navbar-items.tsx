@@ -13,7 +13,7 @@ export const navbarItems = [
 
   {
     id: 3,
-    item: "Books",
-    href: "oracle/books",
+    item: "Ask the oracle",
+    href: "oracle/ask-oracle",
   },
 ];

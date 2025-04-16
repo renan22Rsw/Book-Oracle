@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { navbarItems } from "./navbar-items";
-import { Button } from "../ui/button";
 import { UserMenu } from "../user-menu/user-menu";
 
 export const NavBar = () => {

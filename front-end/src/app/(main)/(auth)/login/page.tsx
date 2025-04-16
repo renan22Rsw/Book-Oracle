@@ -4,10 +4,10 @@ import { LoginForm } from "./_components/login-form";
 const LoginPage = () => {
   return (
     <AuthCard
-      title="Logar"
-      description="Entre na sua conta"
+      title="Login"
+      description="Login to your account"
       href="/sign-in"
-      text="Não tem uma conta?"
+      text="Don't have an account?"
     >
       <LoginForm />
     </AuthCard>

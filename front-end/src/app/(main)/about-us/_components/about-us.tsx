@@ -13,15 +13,14 @@ const firaSansCondensed = Fira_Sans_Condensed({
 export const AboutUs = () => {
   return (
     <div className="flex h-screen w-full">
-      <div className="flex h-[450px] flex-col justify-center px-8 text-[#141515] dark:text-[#EAEBEB]">
+      <div className="flex h-[450px] flex-col justify-center px-8 text-[#0f1215] dark:text-[#eaedf0]">
         <h1 className={`${firaSans.className} text-8xl text-shadow`}>
-          Sobre nós
+          About us
         </h1>
         <p className={`${firaSansCondensed.className} w-[800px] text-[32px]`}>
-          Book oracle é uma plataforma que visa em oferecer as melhores
-          recomendações de livros pro usuário de forma simples e direta,
-          provendo os melhores resultados de livros com base na descrição do
-          usuário.
+          Book Oracle is a platform designed to offer users the best book
+          recommendations in a simple and straightforward way, providing top
+          results based on your personal description.
         </p>
       </div>
       <div className="flex w-full items-end justify-end">

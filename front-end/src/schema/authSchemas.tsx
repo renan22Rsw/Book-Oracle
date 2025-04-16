@@ -3,28 +3,28 @@ import { z } from "zod";
 export const signInSchema = z
   .object({
     username: z.string().min(3, {
-      message: "O nome de usuário deve ter pelo menos 3 letras",
+      message: "Username must be at least 3 characters long",
     }),
     email: z.string().email({
-      message: "O email deve ser válido",
+      message: "Email must be valid",
     }),
     password: z.string().min(8, {
-      message: "A senha deve ter pelo menos 8 caracteres",
+      message: "Password must be at least 8 characters long",
     }),
     confirmPassword: z.string().min(8, {
-      message: "Por favor, confirme sua senha",
+      message: "Pleasse confirm your password",
     }),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "As senhas não coincidem",
+    message: "Passwords do not match",
     path: ["confirmPassword"],
   });
 
 export const loginSchema = z.object({
   email: z.string().email({
-    message: "O email deve ser válido",
+    message: "Email must be valid",
   }),
   password: z.string().min(8, {
-    message: "A senha deve ter pelo menos 8 caracteres",
+    message: "Password must be at least 8 characters long",
   }),
 });

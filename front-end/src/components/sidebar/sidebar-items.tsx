@@ -30,8 +30,8 @@ export const sideBarItemns: sideBarItemsTypes[] = [
 
   {
     id: 3,
-    item: "Ask the Oracle",
-    href: "/oracle/books",
+    item: "Ask the oracle",
+    href: "/oracle/ask-oracle",
     icon: <MagnifyingGlassIcon />,
   },
 

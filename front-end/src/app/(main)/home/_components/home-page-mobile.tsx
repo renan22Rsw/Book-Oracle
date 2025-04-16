@@ -22,15 +22,17 @@ export const HomePageMobile = () => {
           Book{" "}
           <span className="text-[#62EFBE] dark:text-[#109E6C]">Oracle</span>
         </h1>
-        <p className={`${firaSansCondensed.className} text-xl`}>
-          A melhor plataforma para você que procura o melhor livro que você
-          possa descrever.
+        <p
+          className={`${firaSansCondensed.className} text-xl text-[#0f1215] dark:text-[#eaedf0]`}
+        >
+          The ultimate platform for finding the perfect book that fits your
+          imagination.
         </p>
 
         <div>
-          <Link href={"/books"} className="">
-            <button className="h-10 w-[100px] rounded-sm bg-[#CFD1EC] font-bold text-[#141515] dark:bg-[#1D2B72] dark:text-[#EAEBEB] dark:hover:shadow-[#0077ba]">
-              Começar
+          <Link href={"/oracle/ask-oracle"} className="">
+            <button className="h-10 w-[100px] rounded-sm bg-[#3f4e5a] font-bold text-[#eaedf0] dark:bg-[#a5b4c0] dark:text-[#0f1215]">
+              Get Started
             </button>
           </Link>
         </div>

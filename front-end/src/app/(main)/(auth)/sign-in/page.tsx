@@ -4,10 +4,10 @@ import { SignInForm } from "./_components/sign-in-form";
 const SignInPage = () => {
   return (
     <AuthCard
-      title="Cadastre-se"
-      description="Cria sua conta para usar o BookOracle"
+      title="Sign up"
+      description="Create an account"
       href="/login"
-      text="Já tem uma conta?"
+      text="Already have an account?"
     >
       <SignInForm />
     </AuthCard>

@@ -13,7 +13,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { LogOut, MoonIcon, SunIcon } from "lucide-react";
+import {
+  UserRound,
+  Settings,
+  Contrast,
+  MoonIcon,
+  SunIcon,
+  LogOut,
+} from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export const UserMenu = () => {
@@ -33,14 +40,20 @@ export const UserMenu = () => {
             {/* <User /> */}
             <Link href={"#"}>
               {" "}
-              <Button variant={"link"}>Profile</Button>
+              <Button variant={"link"}>
+                <UserRound />
+                Profile
+              </Button>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             {/* <Settings /> */}
             <Link href={"#"}>
               {" "}
-              <Button variant={"link"}>Settings</Button>
+              <Button variant={"link"}>
+                <Settings />
+                Settings
+              </Button>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
@@ -49,17 +62,24 @@ export const UserMenu = () => {
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>
               {/* <ShadowIcon /> */}
-              <Button variant={"ghost"}>Theme</Button>
+              <Button variant={"ghost"}>
+                <Contrast />
+                Theme
+              </Button>
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent>
                 <DropdownMenuItem>
-                  <SunIcon />
-                  <Button>Light</Button>
+                  <Button variant={"ghost"}>
+                    <SunIcon />
+                    Light
+                  </Button>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <MoonIcon />
-                  <Button>Dark</Button>
+                  <Button variant={"ghost"}>
+                    <MoonIcon />
+                    Dark
+                  </Button>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
               </DropdownMenuSubContent>
@@ -69,8 +89,10 @@ export const UserMenu = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuItem>
-          <LogOut />
-          <Button>Log out</Button>
+          <Button variant={"ghost"}>
+            <LogOut />
+            Log out
+          </Button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
