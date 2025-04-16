@@ -1,15 +1,15 @@
 import Image from "next/image";
 import searchBookImg from "@/public/book-image.png";
 
-export const BookPageImage = () => {
+export const AskOraclePageImage = () => {
   return (
     <div>
       <Image
         src={searchBookImg}
         alt="search-book-img"
-        width={632}
-        height={699}
-        className="h-full w-full"
+        width={300}
+        height={300}
+        style={{ width: "auto", height: "auto" }}
       />
     </div>
   );

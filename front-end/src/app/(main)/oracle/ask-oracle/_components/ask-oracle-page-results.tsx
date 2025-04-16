@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 
-export const BookPageResults = () => {
+export const AskOraclePageResults = () => {
   return (
-    <div className="mt-10 rounded-md bg-[#D9D9D9] py-4">
+    <div className="mt-4 rounded-md bg-[#E1E5E8] py-4 dark:bg-[#171B1E]">
       <div className="text- flex w-[370px] justify-between sm:w-[400px] md:w-[500px] lg:w-[650px]">
         <div className="flex items-center px-2">
           <div className="h-full w-[50px] bg-purple-400">image</div>
@@ -16,7 +16,9 @@ export const BookPageResults = () => {
             </p>
           </div>
         </div>
-        <Button className="mx-2 bg-[#F86A6A] font-bold">Check</Button>
+        <Button variant={"outline"} className="mx-2 bg-[#CFD1EC] font-bold">
+          Check
+        </Button>
       </div>
     </div>
   );

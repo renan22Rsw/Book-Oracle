@@ -15,12 +15,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { BookPageTitle } from "./book-page-title";
-import { BookPageContainer } from "./book-page-container";
-import { BookPageImage } from "./book-page-image";
-import { BookPageResults } from "./book-page-results";
+import { AskOraclePageContainer } from "./ask-oracle-page-container";
+import { AskOraclePageTitle } from "./ask-oracle-page-title";
+import { AskOraclePageImage } from "./ask-oracle-page-image";
 
-export const BookPage = () => {
+export const AskOraclePage = () => {
   const form = useForm<z.infer<typeof bookSchema>>({
     resolver: zodResolver(bookSchema),
     defaultValues: {
@@ -28,12 +27,12 @@ export const BookPage = () => {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof bookSchema>) => {
+  const onSubmit = async (data: z.infer<typeof bookSchema>) => {
     console.log(data);
   };
 
   return (
-    <BookPageContainer>
+    <AskOraclePageContainer>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
@@ -56,8 +55,8 @@ export const BookPage = () => {
           />
         </form>
       </Form>
-      <BookPageTitle title="All Books related with your description" />
-      <BookPageImage />
-    </BookPageContainer>
+      <AskOraclePageTitle title="All Books related with your description" />
+      <AskOraclePageImage />
+    </AskOraclePageContainer>
   );
 };
