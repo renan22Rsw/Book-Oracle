@@ -16,7 +16,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       {isMobile ? (
         <SidebarProvider>
           <AppSideBar />
-          <main>
+          <main className="w-full">
             <SideBarIcon />
             {children}
           </main>
@@ -26,7 +26,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
           {pathName.includes("/oracle") ? (
             <SidebarProvider>
               <AppSideBar />
-              <main>
+              <main className="w-full">
                 <SideBarIcon />
                 {children}
               </main>
