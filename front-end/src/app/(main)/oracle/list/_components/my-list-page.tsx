@@ -1,4 +1,5 @@
 import { Trash2Icon } from "lucide-react";
+import Image from "next/image";
 
 export const MyListPage = () => {
   const books = [
@@ -10,11 +11,15 @@ export const MyListPage = () => {
   ];
 
   return (
-    <div className="h-full space-y-4 bg-[#E1E5E8] dark:bg-[#14181D] 2xl:flex 2xl:justify-center 2xl:space-x-10">
+    <div className="h-full space-y-4 bg-[#E1E5E8] dark:bg-[#14181D]">
       <div className="flex flex-col items-center space-y-2">
-        <div className="mt-10 h-[220px] w-[241px] rounded-full bg-yellow-500">
-          {/* Image*/}
-        </div>{" "}
+        <Image
+          src={"https://avatars.githubusercontent.com/u/178677917?v=4"}
+          width={200}
+          height={200}
+          alt="profile-pictrue"
+          className="mt-10 rounded-full"
+        />
         <h3 className="text-3xl font-bold">User</h3>
         <span className="text-2xl font-light italic">email@gmail.com</span>
       </div>
