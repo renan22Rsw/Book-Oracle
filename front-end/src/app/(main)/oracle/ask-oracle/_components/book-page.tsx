@@ -17,7 +17,8 @@ import { z } from "zod";
 
 import { AskOraclePageContainer } from "./ask-oracle-page-container";
 import { AskOraclePageTitle } from "./ask-oracle-page-title";
-import { AskOraclePageImage } from "./ask-oracle-page-image";
+// import { AskOraclePageImage } from "./ask-oracle-page-image";
+import { AskOraclePageResults } from "./ask-oracle-page-results";
 
 export const AskOraclePage = () => {
   const form = useForm<z.infer<typeof bookSchema>>({
@@ -28,7 +29,9 @@ export const AskOraclePage = () => {
   });
 
   const onSubmit = async (data: z.infer<typeof bookSchema>) => {
-    console.log(data);
+    const { description } = data;
+
+    console.log("description", description);
   };
 
   return (
@@ -58,7 +61,7 @@ export const AskOraclePage = () => {
         </form>
       </Form>
       <AskOraclePageTitle title="All Books related with your description" />
-      <AskOraclePageImage />
+      <AskOraclePageResults />
     </AskOraclePageContainer>
   );
 };
