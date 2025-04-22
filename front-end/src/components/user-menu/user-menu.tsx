@@ -14,14 +14,15 @@ import {
 import { Button } from "../ui/button";
 import Link from "next/link";
 import {
-  UserRound,
   Settings,
   Contrast,
   MoonIcon,
   SunIcon,
   LogOut,
+  Clipboard,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { ThemeButton } from "@/theme/theme-button";
 
 export const UserMenu = () => {
   return (
@@ -38,17 +39,17 @@ export const UserMenu = () => {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             {/* <User /> */}
-            <Link href={"#"}>
+            <Link href={"/oracle/list"}>
               {" "}
               <Button variant={"link"}>
-                <UserRound />
-                Profile
+                <Clipboard />
+                My list
               </Button>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             {/* <Settings /> */}
-            <Link href={"#"}>
+            <Link href={"/oracle/settings"}>
               {" "}
               <Button variant={"link"}>
                 <Settings />
@@ -70,16 +71,16 @@ export const UserMenu = () => {
             <DropdownMenuPortal>
               <DropdownMenuSubContent>
                 <DropdownMenuItem>
-                  <Button variant={"ghost"}>
+                  <ThemeButton theme="light" variant="ghost">
                     <SunIcon />
                     Light
-                  </Button>
+                  </ThemeButton>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Button variant={"ghost"}>
+                  <ThemeButton theme="dark" variant="ghost">
                     <MoonIcon />
                     Dark
-                  </Button>
+                  </ThemeButton>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
               </DropdownMenuSubContent>

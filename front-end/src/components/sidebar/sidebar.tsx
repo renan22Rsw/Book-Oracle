@@ -12,10 +12,10 @@ import {
 
 import Link from "next/link";
 import { sideBarItemns } from "./sidebar-items";
-import { Button } from "../ui/button";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import UserMenuIcon from "../user-menu/user-icon";
 import { LogOut } from "lucide-react";
+import { ThemeButton } from "@/theme/theme-button";
 
 export const AppSideBar = () => {
   return (
@@ -50,13 +50,19 @@ export const AppSideBar = () => {
           <span className="font-light italic">example.gmail.com</span>
         </div>
         <div className="flex items-center gap-5">
-          <Button className="w-[100px] bg-[#3f4e5a] dark:bg-[#a5b4c0]">
+          <ThemeButton
+            theme="light"
+            className="w-[100px] bg-[#3f4e5a] dark:bg-[#a5b4c0]"
+          >
             <SunIcon className="text-[#eaedf0] dark:text-[#0f1215]" />
-          </Button>
+          </ThemeButton>
 
-          <Button className="w-[100px] bg-[#3f4e5a] dark:bg-[#a5b4c0]">
+          <ThemeButton
+            theme="dark"
+            className="w-[100px] bg-[#3f4e5a] dark:bg-[#a5b4c0]"
+          >
             <MoonIcon className="text-[#eaedf0] dark:text-[#0f1215]" />
-          </Button>
+          </ThemeButton>
         </div>
 
         <SidebarMenuButton>
