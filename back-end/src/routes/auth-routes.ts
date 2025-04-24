@@ -1,7 +1,16 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
+import { FastifyInstance } from "fastify";
+import { AuthController } from "../controllers/auth-controller";
+import { AuthService } from "../services/auth-service";
 
-export const authRoutes = (app: FastifyInstance) => {
-  app.get("/", async (request: FastifyRequest, reply: FastifyReply) => {
-    return reply.send({ message: "Fastify Auth API" });
-  });
+const authService = new AuthService();
+const authController = new AuthController(authService);
+
+export const authRoutes = async (app: FastifyInstance) => {
+  app.post("/auth/signup", (request, reply) =>
+    authController.signup(request, reply)
+  );
+
+  app.post("/auth/login", (request, reply) =>
+    authController.login(request, reply)
+  );
 };
