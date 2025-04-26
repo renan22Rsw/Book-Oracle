@@ -10,6 +10,10 @@ export const userRoutes = async (app: FastifyInstance) => {
   app.addHook("preHandler", verifyToken);
 
   app.get("/user/profile", (request, reply) =>
-    userController.profile(request, reply)
+    userController.getProfileController(request, reply)
+  );
+
+  app.put("/user/settings", (request, reply) =>
+    userController.updateProfileController(request, reply)
   );
 };

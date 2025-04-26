@@ -7,10 +7,10 @@ const authController = new AuthController(authService);
 
 export const authRoutes = async (app: FastifyInstance) => {
   app.post("/auth/signup", (request, reply) =>
-    authController.signup(request, reply)
+    authController.signupController(request, reply)
   );
 
   app.post("/auth/login", (request, reply) =>
-    authController.login(request, reply)
+    authController.loginController(request, reply)
   );
 };

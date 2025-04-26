@@ -6,7 +6,7 @@ import { loginSchema } from "../schemas/auth-schemas";
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  async signup(request: FastifyRequest, reply: FastifyReply) {
+  async signupController(request: FastifyRequest, reply: FastifyReply) {
     const validatedFields = signUpSchema.safeParse(request.body);
 
     if (!validatedFields.success) {
@@ -38,7 +38,7 @@ export class AuthController {
     }
   }
 
-  async login(request: FastifyRequest, reply: FastifyReply) {
+  async loginController(request: FastifyRequest, reply: FastifyReply) {
     const validatedFields = loginSchema.safeParse(request.body);
 
     if (!validatedFields.success) {
