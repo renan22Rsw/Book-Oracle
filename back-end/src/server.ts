@@ -1,7 +1,10 @@
 import Fastify from "fastify";
-import cookie, { FastifyCookieOptions } from "@fastify/cookie";
 import dotenv from "dotenv";
+import jwt from "@fastify/jwt";
+import cookies from "@fastify/cookie";
+
 import { authRoutes } from "./routes/auth-routes";
+import { userRoutes } from "./routes/user-routes";
 
 dotenv.config();
 
@@ -9,12 +12,16 @@ const fastify = Fastify({
   logger: true,
 });
 
-fastify.register(cookie, {
+fastify.register(jwt, {
+  secret: process.env.JWT_SECRET_KEY as string,
+});
+
+fastify.register(cookies, {
   secret: process.env.COOKIE_SECRET_KEY,
-  parseOptions: {},
-}) as FastifyCookieOptions;
+});
 
 fastify.register(authRoutes);
+fastify.register(userRoutes);
 
 const start = async () => {
   try {

@@ -2,10 +2,10 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { AuthService } from "../services/auth-service";
 import { signUpSchema } from "../schemas/auth-schemas";
 import { loginSchema } from "../schemas/auth-schemas";
-import { generateToken } from "../utils/generate-token";
 
 export class AuthController {
   constructor(private authService: AuthService) {}
+
   async signup(request: FastifyRequest, reply: FastifyReply) {
     const validatedFields = signUpSchema.safeParse(request.body);
 
@@ -39,34 +39,34 @@ export class AuthController {
   }
 
   async login(request: FastifyRequest, reply: FastifyReply) {
-    const valiedatedFields = loginSchema.safeParse(request.body);
+    const validatedFields = loginSchema.safeParse(request.body);
 
-    if (!valiedatedFields.success) {
+    if (!validatedFields.success) {
       return reply.code(400).send({
         message: "Invalid request",
-        errors: valiedatedFields.error.errors,
+        errors: validatedFields.error.errors,
       });
     }
 
-    const { email, password } = valiedatedFields.data;
+    const { email, password } = validatedFields.data;
+
     const user = await this.authService.loginService({ email, password });
 
     if (!user) {
       return reply.code(401).send({ message: "Invalid credentials" });
     }
 
-    const token = generateToken(user.id);
+    const token = reply.server.jwt.sign(
+      { id: user.id },
 
-    if (!token) {
-      return reply.code(500).send({ message: "Error generating token" });
-    }
+      { expiresIn: "1d" }
+    );
 
     reply.setCookie("session", token, {
       path: "/",
       httpOnly: true,
-      signed: true,
       secure: false,
-      sameSite: "strict",
+      maxAge: 60 * 60 * 24,
     });
 
     return reply.code(201).send({
