@@ -2,6 +2,7 @@ import Fastify from "fastify";
 import dotenv from "dotenv";
 import jwt from "@fastify/jwt";
 import cookies from "@fastify/cookie";
+import multipart from "@fastify/multipart";
 
 import { authRoutes } from "./routes/auth-routes";
 import { userRoutes } from "./routes/user-routes";
@@ -19,6 +20,8 @@ fastify.register(jwt, {
 fastify.register(cookies, {
   secret: process.env.COOKIE_SECRET_KEY,
 });
+
+fastify.register(multipart);
 
 fastify.register(authRoutes);
 fastify.register(userRoutes);

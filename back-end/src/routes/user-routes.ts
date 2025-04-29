@@ -16,4 +16,8 @@ export const userRoutes = async (app: FastifyInstance) => {
   app.put("/user/settings", (request, reply) =>
     userController.updateProfileController(request, reply)
   );
+
+  app.patch("/user/settings/profile-picture", (request, reply) =>
+    userController.updateProfilePictureController(request, reply)
+  );
 };

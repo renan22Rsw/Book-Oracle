@@ -2,6 +2,10 @@ import { UserService } from "../services/user-service";
 import { FastifyRequest, FastifyReply } from "fastify";
 import { signUpSchema as userSchema } from "../schemas/auth-schemas";
 
+import fs from "fs";
+import path from "path";
+import { pipeline } from "stream/promises";
+
 export class UserController {
   constructor(private userService: UserService) {}
 
@@ -47,6 +51,47 @@ export class UserController {
         .send({ message: "Your profile has been updated!", user });
     } catch (err: any) {
       console.log(err.message);
+      return reply.code(401).send({ message: "Error during update" });
+    }
+  }
+
+  async updateProfilePictureController(
+    request: FastifyRequest,
+    reply: FastifyReply
+  ) {
+    const parts = request.parts();
+    const { id } = request.user as { id: string };
+    let imageFileName = "";
+
+    try {
+      for await (const part of parts) {
+        if (part.type === "file") {
+          const fileName = `${Date.now()}-${part.filename}`;
+          const uploadDir = path.join(__dirname, "..", "uploads");
+
+          await fs.promises.mkdir(uploadDir, { recursive: true });
+
+          const filePath = path.join(uploadDir, fileName);
+
+          await pipeline(part.file, fs.createWriteStream(filePath));
+
+          imageFileName = fileName;
+        }
+
+        if (!imageFileName) {
+          return reply.code(400).send({ message: "No image uploaded" });
+        }
+
+        await this.userService.updateProfilePictureService(
+          id,
+          `/uploads/${imageFileName}`
+        );
+      }
+
+      return reply
+        .send(204)
+        .send({ message: "Profile picture updated successfully" });
+    } catch (err) {
       return reply.code(401).send({ message: "Error during update" });
     }
   }

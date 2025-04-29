@@ -45,4 +45,19 @@ export class UserService {
       console.log(err.message);
     }
   }
+
+  async updateProfilePictureService(id: string, profileImageUrl: string) {
+    try {
+      await db.user.update({
+        where: {
+          id,
+        },
+        data: {
+          profileImageUrl,
+        },
+      });
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  }
 }
