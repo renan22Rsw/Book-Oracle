@@ -6,6 +6,7 @@ import multipart from "@fastify/multipart";
 
 import { authRoutes } from "./routes/auth-routes";
 import { userRoutes } from "./routes/user-routes";
+import { oralceRoutes } from "./routes/oracle-routes";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ fastify.register(multipart);
 
 fastify.register(authRoutes);
 fastify.register(userRoutes);
+fastify.register(oralceRoutes);
 
 const start = async () => {
   try {
