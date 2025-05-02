@@ -30,27 +30,37 @@ export class AuthService {
 
       return user;
     } catch (err) {
-      console.log(err);
+      if (err instanceof Error) {
+        throw err;
+      }
+      throw new Error("something went wrong");
     }
   }
 
   async loginService({ email, password }: LoginData) {
-    const user = await db.user.findUnique({
-      where: {
-        email,
-      },
-    });
+    try {
+      const user = await db.user.findUnique({
+        where: {
+          email,
+        },
+      });
 
-    if (!user) {
-      throw new Error("User does not exist");
+      if (!user) {
+        throw new Error("User does not exist");
+      }
+
+      const isPasswordMatch = await compare(password, user.password);
+
+      if (!isPasswordMatch) {
+        throw new Error("Incorrect password");
+      }
+
+      return user;
+    } catch (err) {
+      if (err instanceof Error) {
+        throw err;
+      }
+      throw new Error("Something went wrong");
     }
-
-    const isPasswordMatch = await compare(password, user.password);
-
-    if (!isPasswordMatch) {
-      throw new Error("Incorrect password");
-    }
-
-    return user;
   }
 }

@@ -16,8 +16,11 @@ export class UserService {
       }
 
       return user;
-    } catch (err: any) {
-      console.log(err.message);
+    } catch (err) {
+      if (err instanceof Error) {
+        throw err;
+      }
+      throw new Error("something went wrong");
     }
   }
 
@@ -41,8 +44,11 @@ export class UserService {
       });
 
       return user;
-    } catch (err: any) {
-      console.log(err.message);
+    } catch (err) {
+      if (err instanceof Error) {
+        throw err;
+      }
+      throw new Error("something went wrong");
     }
   }
 
@@ -56,8 +62,11 @@ export class UserService {
           profileImageUrl,
         },
       });
-    } catch (err: any) {
-      console.log(err.message);
+    } catch (err) {
+      if (err instanceof Error) {
+        throw err;
+      }
+      throw new Error("something went wrong");
     }
   }
 }

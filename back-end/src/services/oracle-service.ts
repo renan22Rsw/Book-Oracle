@@ -21,7 +21,7 @@ export class OracleServices {
       return books;
     } catch (err) {
       if (err instanceof Error) {
-        throw new Error(err.message);
+        throw err;
       }
       throw new Error("something went wrong!");
     }
