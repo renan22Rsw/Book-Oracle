@@ -80,18 +80,18 @@ export class UserController {
           imageFileName = fileName;
         }
 
-        if (!imageFileName) {
-          return reply.code(400).send({ error: "No image has been uploaded" });
-        }
-
         await this.userService.updateProfilePictureService(
           id,
           `/uploads/${imageFileName}`
         );
       }
 
+      if (!imageFileName) {
+        return reply.code(400).send({ error: "No image has been uploaded" });
+      }
+
       return reply
-        .send(204)
+        .code(204)
         .send({ message: "Profile picture updated successfully" });
     } catch (err) {
       if (err instanceof Error) {

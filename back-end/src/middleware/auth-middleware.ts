@@ -6,8 +6,10 @@ export const verifyToken = async (
 ) => {
   try {
     await request.jwtVerify();
-  } catch (err: any) {
-    console.log(err.message);
-    return reply.code(401).send({ message: "Unathorized" });
+  } catch (err) {
+    if (err instanceof Error) {
+      return reply.code(400).send({ error: err.message });
+    }
+    return reply.code(401).send({ error: "Unathorized" });
   }
 };
