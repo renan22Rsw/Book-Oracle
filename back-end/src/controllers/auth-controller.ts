@@ -1,4 +1,4 @@
-import { FastifyReply, FastifyRequest } from "fastify";
+import { FastifyError, FastifyReply, FastifyRequest } from "fastify";
 import { AuthService } from "../services/auth-service";
 import { signUpSchema } from "../schemas/auth-schemas";
 import { loginSchema } from "../schemas/auth-schemas";
@@ -26,15 +26,14 @@ export class AuthController {
         confirmPassword,
       });
 
-      if (!user) {
-        return reply.code(409).send({ message: "User already exists" });
-      }
-
       return reply
         .code(201)
         .send({ message: "User created successfully", user });
-    } catch (err: any) {
-      return reply.code(500).send({ message: err.message });
+    } catch (err) {
+      if (err instanceof Error) {
+        return reply.code(400).send({ error: err.message });
+      }
+      return reply.code(500).send({ error: "Something went wrong" });
     }
   }
 
@@ -48,30 +47,37 @@ export class AuthController {
       });
     }
 
-    const { email, password } = validatedFields.data;
+    try {
+      const { email, password } = validatedFields.data;
 
-    const user = await this.authService.loginService({ email, password });
+      const user = await this.authService.loginService({ email, password });
 
-    if (!user) {
-      return reply.code(401).send({ message: "Invalid credentials" });
+      if (!user) {
+        return reply.code(400).send({ error: "Invalid credentials" });
+      }
+
+      const token = reply.server.jwt.sign(
+        { id: user.id },
+
+        { expiresIn: "1d" }
+      );
+
+      reply.setCookie("session", token, {
+        path: "/",
+        httpOnly: true,
+        secure: false,
+        maxAge: 60 * 60 * 24,
+      });
+
+      return reply.code(201).send({
+        ...user,
+        token,
+      });
+    } catch (err) {
+      if (err instanceof Error) {
+        return reply.code(400).send({ error: err.message });
+      }
+      return reply.code(500).send({ error: "Something went wrong" });
     }
-
-    const token = reply.server.jwt.sign(
-      { id: user.id },
-
-      { expiresIn: "1d" }
-    );
-
-    reply.setCookie("session", token, {
-      path: "/",
-      httpOnly: true,
-      secure: false,
-      maxAge: 60 * 60 * 24,
-    });
-
-    return reply.code(201).send({
-      ...user,
-      token,
-    });
   }
 }

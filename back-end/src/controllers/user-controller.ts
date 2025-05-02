@@ -14,14 +14,14 @@ export class UserController {
 
     try {
       const user = await this.userService.getProfileService(id);
-      if (!user) {
-        return reply.code(401).send({ message: "user does not exist" });
-      }
 
       return user;
-    } catch (err: any) {
-      console.log(err.message);
-      return reply.code(401).send({ message: "something went wrong" });
+    } catch (err) {
+      if (err instanceof Error) {
+        return reply.code(400).send({ error: err.message });
+      }
+
+      return reply.code(500).send({ error: "Something went wrong" });
     }
   }
 
@@ -39,7 +39,7 @@ export class UserController {
     const { username, email, password, confirmPassword } = validatedFields.data;
 
     try {
-      const user = await this.userService.updateProfileService(id, {
+      await this.userService.updateProfileService(id, {
         username,
         email,
         password,
@@ -48,10 +48,12 @@ export class UserController {
 
       return reply
         .code(204)
-        .send({ message: "Your profile has been updated!", user });
-    } catch (err: any) {
-      console.log(err.message);
-      return reply.code(401).send({ message: "Error during update" });
+        .send({ message: "Your profile has been updated!" });
+    } catch (err) {
+      if (err instanceof Error) {
+        return reply.code(400).send({ error: err.message });
+      }
+      return reply.code(500).send({ error: "Something went wrong" });
     }
   }
 
@@ -79,7 +81,7 @@ export class UserController {
         }
 
         if (!imageFileName) {
-          return reply.code(400).send({ message: "No image uploaded" });
+          return reply.code(400).send({ error: "No image has been uploaded" });
         }
 
         await this.userService.updateProfilePictureService(
@@ -92,7 +94,10 @@ export class UserController {
         .send(204)
         .send({ message: "Profile picture updated successfully" });
     } catch (err) {
-      return reply.code(401).send({ message: "Error during update" });
+      if (err instanceof Error) {
+        return reply.code(400).send({ error: err.message });
+      }
+      return reply.code(500).send({ error: "Something went wrong" });
     }
   }
 }

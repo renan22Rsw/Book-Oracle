@@ -17,13 +17,12 @@ export class OracleControllers {
         books_keywords
       );
 
-      console.log(books_keywords);
       return reply.send({ oracleResults: results });
-    } catch (err: any) {
+    } catch (err) {
       if (err instanceof Error) {
-        return reply.code(401).send({ message: err.message });
+        return reply.code(400).send({ message: err.message });
       }
-      return reply.code(401).send({ message: "something went wrong" });
+      return reply.code(500).send({ message: "Something went wrong" });
     }
   }
 }
