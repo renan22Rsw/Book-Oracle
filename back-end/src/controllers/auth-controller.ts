@@ -80,4 +80,18 @@ export class AuthController {
       return reply.code(500).send({ error: "Something went wrong" });
     }
   }
+
+  async logoutController(request: FastifyRequest, reply: FastifyReply) {
+    const { session } = request.cookies as { session: string };
+
+    try {
+      reply.clearCookie(session);
+      return reply.send({ message: "You have logged out successfully." });
+    } catch (err) {
+      if (err instanceof Error) {
+        return reply.status(400).send({ error: err.message });
+      }
+      return reply.status(500).send({ error: "Something went wrong" });
+    }
+  }
 }
