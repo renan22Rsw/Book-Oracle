@@ -9,6 +9,18 @@ const userController = new UserController(userService);
 export const userRoutes = async (app: FastifyInstance) => {
   app.addHook("preHandler", verifyToken);
 
+  app.post("/user/list", (request, reply) =>
+    userController.addUserBooksController(request, reply)
+  );
+
+  app.get("/user/list", (request, reply) => {
+    userController.getUserBooksContreller(request, reply);
+  });
+
+  app.delete("/user/list/:id", (request, reply) => {
+    userController.deleteUserBooksController(request, reply);
+  });
+
   app.get("/user/profile", (request, reply) =>
     userController.getProfileController(request, reply)
   );

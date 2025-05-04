@@ -5,6 +5,7 @@ import { signUpSchema as userSchema } from "../schemas/auth-schemas";
 import fs from "fs";
 import path from "path";
 import { pipeline } from "stream/promises";
+import { UserBookList } from "../types/book-oracle-type";
 
 export class UserController {
   constructor(private userService: UserService) {}
@@ -98,6 +99,63 @@ export class UserController {
         return reply.code(400).send({ error: err.message });
       }
       return reply.code(500).send({ error: "Something went wrong" });
+    }
+  }
+
+  async addUserBooksController(request: FastifyRequest, reply: FastifyReply) {
+    const { id } = request.user as { id: string };
+    const { title, coverImageUrl } = request.body as UserBookList;
+
+    try {
+      await this.userService.addUserBooksService(id, {
+        title,
+        coverImageUrl,
+      });
+
+      return reply
+        .code(201)
+        .send({
+          message: "Successfully, this book has been added to your list",
+        });
+    } catch (err) {
+      if (err instanceof Error) {
+        return reply.code(400).send({ error: err.message });
+      }
+      return reply.code(500).send({ error: "Something went wrong" });
+    }
+  }
+
+  async getUserBooksContreller(request: FastifyRequest, reply: FastifyReply) {
+    const { id } = request.user as { id: string };
+
+    try {
+      const bookList = await this.userService.getUserBooksService(id);
+      return reply.send(bookList);
+    } catch (err) {
+      if (err instanceof Error) {
+        throw err;
+      }
+      return new Error("Something went wrong");
+    }
+  }
+
+  async deleteUserBooksController(
+    request: FastifyRequest,
+    reply: FastifyReply
+  ) {
+    const { id } = request.params as { id: string };
+
+    try {
+      await this.userService.deleteUserBookService(id);
+
+      return reply.send({
+        message: "Successfully, this book has been deleted from your list",
+      });
+    } catch (err) {
+      if (err instanceof Error) {
+        throw err;
+      }
+      return new Error("Something went wrong");
     }
   }
 }
