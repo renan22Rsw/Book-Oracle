@@ -18,12 +18,13 @@ import AuthButton from "../../_components/auth-button";
 import axios, { AxiosError } from "axios";
 import { ErrorResponse } from "@/types/axios-error";
 import { AuthErrorMessage } from "../../_components/auth-error-message";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 export const LoginForm = () => {
   const loginUrl = process.env.NEXT_PUBLIC_LOGIN_URL as string;
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
   const signInForm = useForm<z.infer<typeof loginSchema>>({
@@ -38,26 +39,28 @@ export const LoginForm = () => {
     const { email, password } = values;
 
     setErrorMessage("");
-    try {
-      await axios.post(
-        loginUrl,
-        {
-          email,
-          password,
-        },
-        {
-          withCredentials: true,
-        },
-      );
-      router.push("/oracle/ask-oracle");
-    } catch (err) {
-      const error = err as AxiosError<ErrorResponse>;
-      if (error.response) {
-        setErrorMessage(error.response.data.error);
-      } else {
-        setErrorMessage("Something went wrong");
-      }
-    }
+    startTransition(() => {
+      axios
+        .post(
+          loginUrl,
+          {
+            email,
+            password,
+          },
+          {
+            withCredentials: true,
+          },
+        )
+        .then(() => router.push("/oracle/ask-oracle"))
+        .catch((err) => {
+          const error = err as AxiosError<ErrorResponse>;
+          if (error.response) {
+            setErrorMessage(error.response.data.error);
+          } else {
+            setErrorMessage("Something went wrong");
+          }
+        });
+    });
   };
 
   return (
@@ -104,7 +107,7 @@ export const LoginForm = () => {
         <AuthErrorMessage msg={errorMessage} />
 
         <div className="flex items-center justify-center">
-          <AuthButton label="Login" />
+          <AuthButton text="Login" disabled={isPending} />
         </div>
       </form>
     </Form>
