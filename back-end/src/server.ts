@@ -3,6 +3,8 @@ import cors from "@fastify/cors";
 import dotenv from "dotenv";
 import jwt from "@fastify/jwt";
 import cookies from "@fastify/cookie";
+import fastifyStatic from "@fastify/static";
+import path from "path";
 import multipart from "@fastify/multipart";
 
 import { authRoutes } from "./routes/auth-routes";
@@ -28,6 +30,11 @@ fastify.register(jwt, {
 
 fastify.register(cookies, {
   secret: process.env.COOKIE_SECRET_KEY,
+});
+
+fastify.register(fastifyStatic, {
+  root: path.join(__dirname, "uploads"),
+  prefix: "/uploads/",
 });
 
 fastify.register(multipart);
