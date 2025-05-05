@@ -23,7 +23,7 @@ export class OracleServices {
       if (err instanceof Error) {
         throw err;
       }
-      throw new Error("something went wrong!");
+      throw new Error("Something went wrong!");
     }
   }
 }

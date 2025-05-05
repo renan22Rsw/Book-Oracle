@@ -6,7 +6,7 @@ const LoginPage = () => {
     <AuthCard
       title="Login"
       description="Login to your account"
-      href="/sign-in"
+      href="/sign-up"
       text="Don't have an account?"
     >
       <LoginForm />

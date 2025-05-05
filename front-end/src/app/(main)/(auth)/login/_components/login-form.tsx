@@ -15,8 +15,17 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import AuthButton from "../../_components/auth-button";
+import axios, { AxiosError } from "axios";
+import { ErrorResponse } from "@/types/axios-error";
+import { AuthErrorMessage } from "../../_components/auth-error-message";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export const LoginForm = () => {
+  const loginUrl = process.env.NEXT_PUBLIC_LOGIN_URL as string;
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const router = useRouter();
+
   const signInForm = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -25,8 +34,30 @@ export const LoginForm = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof loginSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof loginSchema>) => {
+    const { email, password } = values;
+
+    setErrorMessage("");
+    try {
+      await axios.post(
+        loginUrl,
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+      router.push("/oracle/ask-oracle");
+    } catch (err) {
+      const error = err as AxiosError<ErrorResponse>;
+      if (error.response) {
+        setErrorMessage(error.response.data.error);
+      } else {
+        setErrorMessage("Something went wrong");
+      }
+    }
   };
 
   return (
@@ -69,6 +100,8 @@ export const LoginForm = () => {
             </FormItem>
           )}
         />
+
+        <AuthErrorMessage msg={errorMessage} />
 
         <div className="flex items-center justify-center">
           <AuthButton label="Login" />

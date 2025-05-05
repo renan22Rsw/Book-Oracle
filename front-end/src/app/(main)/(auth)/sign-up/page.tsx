@@ -1,7 +1,7 @@
 import { AuthCard } from "../_components/auth-card";
-import { SignInForm } from "./_components/sign-in-form";
+import { SignInForm } from "./_components/sign-up-form";
 
-const SignInPage = () => {
+const SignUpPage = () => {
   return (
     <AuthCard
       title="Sign up"
@@ -14,4 +14,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default SignUpPage;

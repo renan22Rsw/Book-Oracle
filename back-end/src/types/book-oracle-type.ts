@@ -10,3 +10,8 @@ export interface BookOracle {
     };
   };
 }
+
+export interface UserBookList {
+  title: string;
+  coverImageUrl: string;
+}

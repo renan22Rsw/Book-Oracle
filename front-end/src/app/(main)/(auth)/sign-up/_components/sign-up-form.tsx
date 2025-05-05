@@ -14,9 +14,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import axios, { AxiosResponse } from "axios";
+import { AxiosError } from "axios";
 import AuthButton from "../../_components/auth-button";
+import { useState } from "react";
+import { AuthMessage } from "../../_components/auth-message";
+import { AuthErrorMessage } from "../../_components/auth-error-message";
+import { ErrorResponse } from "@/types/axios-error";
 
 export const SignInForm = () => {
+  const signupUrl = process.env.NEXT_PUBLIC_SIGNUP_URL as string;
+  const [message, setMessage] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
   const signInForm = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -27,8 +37,27 @@ export const SignInForm = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof signInSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof signInSchema>) => {
+    const { username, email, password, confirmPassword } = values;
+    setMessage("");
+    setErrorMessage("");
+    try {
+      const response: AxiosResponse = await axios.post(signupUrl, {
+        username,
+        email,
+        password,
+        confirmPassword,
+      });
+      setMessage(response.data.message);
+    } catch (err) {
+      const error = err as AxiosError<ErrorResponse>;
+
+      if (error.response) {
+        setErrorMessage(error.response.data.error);
+      } else {
+        setErrorMessage("Something went wrong");
+      }
+    }
   };
 
   return (
@@ -108,6 +137,8 @@ export const SignInForm = () => {
             </FormItem>
           )}
         />
+        <AuthMessage msg={message} />
+        <AuthErrorMessage msg={errorMessage} />
 
         <div className="flex items-center justify-center">
           <AuthButton label="Sign up" />

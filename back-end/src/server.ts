@@ -1,4 +1,5 @@
 import Fastify from "fastify";
+import cors from "@fastify/cors";
 import dotenv from "dotenv";
 import jwt from "@fastify/jwt";
 import cookies from "@fastify/cookie";
@@ -12,6 +13,13 @@ dotenv.config();
 
 const fastify = Fastify({
   logger: true,
+});
+
+fastify.register(cors, {
+  origin: process.env.ORIGIN_URL,
+  methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
 });
 
 fastify.register(jwt, {
