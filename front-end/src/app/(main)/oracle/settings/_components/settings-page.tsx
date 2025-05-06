@@ -1,9 +1,15 @@
-import { UpdateProfileForm } from "./updateProfileForm";
+import { getUserSession } from "@/utils/get-user";
+import { SettingsPageContainer } from "./settings-page-container";
+import { UpdateProfileForm } from "./update-profile-form";
+import { UpdateProfilePicture } from "./update-profile-picture";
 
-export const SettingsPage = () => {
+export const SettingsPage = async () => {
+  const { username, email, profileImageUrl } = await getUserSession();
+
   return (
-    <div className="px-20 py-10">
-      <UpdateProfileForm />
-    </div>
+    <SettingsPageContainer>
+      <UpdateProfilePicture profileImageUrl={profileImageUrl as string} />
+      <UpdateProfileForm username={username} email={email} />
+    </SettingsPageContainer>
   );
 };

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export const GetUserToken = () => {
-  const [token, setToken] = useState();
+  const [token, setToken] = useState<string>();
 
   useEffect(() => {
     const fetchToken = async () => {

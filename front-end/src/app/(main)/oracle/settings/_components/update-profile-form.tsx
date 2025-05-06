@@ -10,32 +10,72 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { updateProfileSchema } from "@/schema/settingsSchema";
 import { useState } from "react";
 import { SettingsPageInputLabel } from "./settings-page-input-label";
+import { UserSession } from "@/types/user-session";
+import { GetUserToken } from "@/hooks/get-user-token";
 
-export const UpdateProfileForm = () => {
+import axios, { AxiosError, AxiosResponse } from "axios";
+import {
+  UpdateFormErrorMessage,
+  UpdateFormSuccessMessage,
+} from "./update-profile-message";
+import { ErrorResponse } from "@/types/axios-error";
+
+export const UpdateProfileForm = ({ username, email }: UserSession) => {
   const form = useForm<z.infer<typeof updateProfileSchema>>({
     resolver: zodResolver(updateProfileSchema),
     defaultValues: {
-      username: "exampleuser",
-      email: "example@gmail.com",
-      picture: undefined,
-      password: "password123",
-      confirmPassword: "password123",
+      username,
+      email,
+      password: "",
+      confirmPassword: "",
     },
   });
 
-  const [email, setEmail] = useState<boolean>(true);
-  const [username, setUsername] = useState<boolean>(true);
-  const [password, setPassword] = useState<boolean>(true);
+  const userSettingUrl = process.env.NEXT_PUBLIC_UPDATE_SETTINGS as string;
+  const [disabledEmail, setEmail] = useState<boolean>(true);
+  const [disabledUsername, setUsername] = useState<boolean>(true);
+  const [disabledPassword, setPassword] = useState<boolean>(true);
+  const [successMsg, setSuccessMsg] = useState<string>("");
+  const [errorMsg, setErrorMsg] = useState<string>("");
 
-  function onSubmit(values: z.infer<typeof updateProfileSchema>) {
-    console.log(values);
+  const { token } = GetUserToken();
+
+  async function onSubmit(values: z.infer<typeof updateProfileSchema>) {
+    const { username, email, password, confirmPassword } = values;
+    setSuccessMsg("");
+    setErrorMsg("");
+
+    try {
+      const response: AxiosResponse = await axios.put(
+        userSettingUrl,
+        {
+          username,
+          email,
+          password,
+          confirmPassword,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      setSuccessMsg(response.data.message);
+    } catch (err) {
+      const error = err as AxiosError<ErrorResponse>;
+      if (error.response) {
+        setErrorMsg(error.response.data.error);
+      } else {
+        setErrorMsg("Something went wrong");
+      }
+    }
   }
 
   return (
@@ -43,31 +83,11 @@ export const UpdateProfileForm = () => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="picture"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <FormLabel>
-                  <Input
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      field.onChange(file);
-                    }}
-                    className="h-[200px] w-[200px] rounded-full"
-                    type="file"
-                  />
-                </FormLabel>
-              </FormControl>
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
           name="username"
           render={({ field }) => (
             <FormItem>
               <SettingsPageInputLabel
+                htmlLabel="username"
                 label="Username"
                 onClick={() => setUsername(!username)}
               />
@@ -76,7 +96,8 @@ export const UpdateProfileForm = () => {
                   className="xl:w-2/4"
                   placeholder="username"
                   {...field}
-                  disabled={username}
+                  disabled={disabledUsername}
+                  id="username"
                 />
               </FormControl>
               <FormMessage />
@@ -90,15 +111,17 @@ export const UpdateProfileForm = () => {
           render={({ field }) => (
             <FormItem>
               <SettingsPageInputLabel
+                htmlLabel="email"
                 label="Email"
-                onClick={() => setEmail(!email)}
+                onClick={() => setEmail(!disabledEmail)}
               />
               <FormControl>
                 <Input
                   placeholder="email"
                   {...field}
                   className="xl:w-2/4"
-                  disabled={email}
+                  disabled={disabledEmail}
+                  id="email"
                 />
               </FormControl>
               <FormMessage />
@@ -112,16 +135,18 @@ export const UpdateProfileForm = () => {
           render={({ field }) => (
             <FormItem>
               <SettingsPageInputLabel
+                htmlLabel="password"
                 label="Password"
-                onClick={() => setPassword(!password)}
+                onClick={() => setPassword(!disabledPassword)}
               />
               <FormControl>
                 <Input
                   placeholder="password"
                   {...field}
                   className="xl:w-2/4"
-                  disabled={password}
+                  disabled={disabledPassword}
                   type="password"
+                  id="password"
                 />
               </FormControl>
               <FormMessage />
@@ -135,16 +160,18 @@ export const UpdateProfileForm = () => {
           render={({ field }) => (
             <FormItem>
               <SettingsPageInputLabel
+                htmlLabel="Confirm-Password"
                 label="Confirm Password"
-                onClick={() => setPassword(!password)}
+                onClick={() => setPassword(!disabledPassword)}
               />
               <FormControl>
                 <Input
                   placeholder="confirm password"
                   {...field}
                   className="xl:w-2/4"
-                  disabled={password}
+                  disabled={disabledPassword}
                   type="password"
+                  id="Confirm-Password"
                 />
               </FormControl>
               <FormMessage />
@@ -152,10 +179,17 @@ export const UpdateProfileForm = () => {
           )}
         />
 
+        <UpdateFormSuccessMessage text={successMsg} />
+        <UpdateFormErrorMessage text={errorMsg} />
+
         <div className="flex items-center justify-center xl:justify-start">
           <Button
             type="submit"
-            disabled={username && email && password === true ? true : false}
+            disabled={
+              disabledUsername && disabledUsername && disabledPassword === true
+                ? true
+                : false
+            }
             className="w-full md:w-auto"
           >
             Update Profile

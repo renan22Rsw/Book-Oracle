@@ -48,7 +48,7 @@ export class UserController {
       });
 
       return reply
-        .code(204)
+        .code(200)
         .send({ message: "Your profile has been updated!" });
     } catch (err) {
       if (err instanceof Error) {
@@ -92,7 +92,7 @@ export class UserController {
       }
 
       return reply
-        .code(204)
+        .code(200)
         .send({ message: "Profile picture updated successfully" });
     } catch (err) {
       if (err instanceof Error) {
@@ -112,11 +112,9 @@ export class UserController {
         coverImageUrl,
       });
 
-      return reply
-        .code(201)
-        .send({
-          message: "Successfully, this book has been added to your list",
-        });
+      return reply.code(201).send({
+        message: "Successfully, this book has been added to your list",
+      });
     } catch (err) {
       if (err instanceof Error) {
         return reply.code(400).send({ error: err.message });
