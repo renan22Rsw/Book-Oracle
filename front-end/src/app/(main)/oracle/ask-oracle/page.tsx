@@ -1,4 +1,4 @@
-import { AskOraclePage } from "./_components/book-page";
+import { AskOraclePage } from "./_components/ask-oracle-page";
 
 const AskOracle = () => {
   return <AskOraclePage />;
