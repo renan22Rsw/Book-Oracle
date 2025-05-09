@@ -83,7 +83,7 @@ export class UserService {
         },
       });
 
-      if (book) {
+      if (book?.title) {
         throw new Error("This book is already on your list");
       }
 

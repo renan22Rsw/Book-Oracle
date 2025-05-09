@@ -27,7 +27,7 @@ export const AskOraclePageResults = ({
             height={50}
             alt="book-cover"
             priority={true}
-            className="h-[70px] w-[50px]"
+            className="h-auto w-auto"
           />
           <div className="space-y-0.5 px-4">
             <h3 className="cursor-pointer">{title}</h3>

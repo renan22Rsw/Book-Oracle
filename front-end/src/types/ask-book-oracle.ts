@@ -18,6 +18,7 @@ export interface OralceBook {
     authors: string[];
     description: string;
     covers: {
+      smallThumbnail: string;
       small: string;
     };
   };

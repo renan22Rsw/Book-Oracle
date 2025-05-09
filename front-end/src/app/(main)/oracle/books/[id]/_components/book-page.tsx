@@ -1,14 +1,19 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { GetUserToken } from "@/hooks/get-user-token";
+import { toast } from "@/hooks/use-toast";
+import { ErrorResponse } from "@/types/axios-error";
+import axios, { AxiosError } from "axios";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 
 interface BookPageProps {
   title: string;
   description: string;
   authors: string[];
   covers: {
+    smallThumbnail: string;
     small: string;
   };
 }
@@ -20,6 +25,49 @@ export const BookPage = ({
 }: BookPageProps) => {
   const [isDescriptionTooLong, setDescriptionToolong] =
     useState<boolean>(false);
+
+  const addOralceBookUrl = process.env.NEXT_PUBLIC_ADD_ORACLE_BOOK as string;
+  const { token } = GetUserToken();
+  const [isPending, startTransition] = useTransition();
+
+  const addOralceBook = async (title: string, coverImageUrl: string) => {
+    startTransition(async () => {
+      try {
+        const response = await axios.post(
+          addOralceBookUrl,
+          {
+            title,
+            coverImageUrl,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
+        toast({
+          title: title,
+          description: response.data.message,
+        });
+      } catch (err) {
+        const error = err as AxiosError<ErrorResponse>;
+        if (error.response) {
+          toast({
+            title: "Error",
+            description: error.response.data.error,
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Error",
+            description: "Something went wrong",
+            variant: "destructive",
+          });
+        }
+      }
+    });
+  };
 
   return (
     <div className="mx-auto h-full max-w-[1000px] rounded-md bg-[#E1E5E8] p-4 dark:bg-[#14181D] xl:my-20 xl:h-auto">
@@ -41,8 +89,12 @@ export const BookPage = ({
             </div>
           )}
 
-          <Button className="mx-4 w-[150px] bg-[#3f4e5a] font-bold dark:bg-[#a5b4c0] xl:duration-300 xl:ease-in-out xl:hover:scale-105">
-            Add to list
+          <Button
+            className="mx-4 w-[150px] bg-[#3f4e5a] font-bold dark:bg-[#a5b4c0] xl:duration-300 xl:ease-in-out xl:hover:scale-105"
+            onClick={() => addOralceBook(title, covers.smallThumbnail)}
+            disabled={isPending}
+          >
+            {isPending ? "Loading..." : "Add to list"}
           </Button>
         </div>
         <div className="space-y-10 px-4 py-6">
