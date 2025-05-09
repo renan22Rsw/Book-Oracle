@@ -23,7 +23,36 @@ export class OracleServices {
       if (err instanceof Error) {
         throw err;
       }
-      throw new Error("Something went wrong!");
+      throw new Error("Something went wrong");
+    }
+  }
+
+  async getBooksByIdService(bookId: string) {
+    try {
+      const response: AxiosResponse<BookOracle> = await axios.get(
+        `https://www.googleapis.com/books/v1/volumes/${bookId}`
+      );
+
+      const { id } = response.data;
+      const {
+        title,
+        description,
+        authors,
+        imageLinks: covers,
+      } = response.data.volumeInfo;
+
+      return {
+        id,
+        title,
+        description,
+        authors,
+        covers,
+      };
+    } catch (err) {
+      if (err instanceof Error) {
+        throw err;
+      }
+      throw new Error("Something went wrong");
     }
   }
 }

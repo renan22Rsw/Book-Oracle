@@ -12,4 +12,8 @@ export const oralceRoutes = async (app: FastifyInstance) => {
   app.get("/oracle/results", (request, reply) =>
     oracleController.getBooksResultsController(request, reply)
   );
+
+  app.get("/oracle/book/:id", (request, reply) => {
+    oracleController.getBooksByIdController(request, reply);
+  });
 };

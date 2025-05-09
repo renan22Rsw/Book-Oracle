@@ -25,4 +25,18 @@ export class OracleControllers {
       return reply.code(500).send({ message: "Something went wrong" });
     }
   }
+
+  async getBooksByIdController(request: FastifyRequest, reply: FastifyReply) {
+    const { id } = request.params as { id: string };
+
+    try {
+      const results = await this.oracleServices.getBooksByIdService(id);
+      return reply.send({ oracleResults: results });
+    } catch (err) {
+      if (err instanceof Error) {
+        return reply.code(400).send({ message: err.message });
+      }
+      return reply.code(500).send({ message: "Something went wrong" });
+    }
+  }
 }
