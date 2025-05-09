@@ -10,3 +10,15 @@ export interface AskBookOracle {
     };
   }[];
 }
+
+export interface OralceBook {
+  oracleResults: {
+    id: string;
+    title: string;
+    authors: string[];
+    description: string;
+    covers: {
+      small: string;
+    };
+  };
+}
