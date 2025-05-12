@@ -15,6 +15,7 @@ const Books = async ({ params }: BooksProps) => {
 
   return (
     <BookPage
+      bookId={id}
       title={title}
       description={description}
       authors={authors}

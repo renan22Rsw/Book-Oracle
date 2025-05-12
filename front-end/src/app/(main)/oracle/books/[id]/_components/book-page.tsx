@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useState, useTransition } from "react";
 
 interface BookPageProps {
+  bookId: string;
   title: string;
   description: string;
   authors: string[];
@@ -18,6 +19,7 @@ interface BookPageProps {
   };
 }
 export const BookPage = ({
+  bookId,
   title,
   description,
   authors,
@@ -36,6 +38,7 @@ export const BookPage = ({
         const response = await axios.post(
           addOralceBookUrl,
           {
+            bookId,
             title,
             coverImageUrl,
           },

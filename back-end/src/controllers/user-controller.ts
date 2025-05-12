@@ -104,10 +104,11 @@ export class UserController {
 
   async addUserBooksController(request: FastifyRequest, reply: FastifyReply) {
     const { id } = request.user as { id: string };
-    const { title, coverImageUrl } = request.body as UserBookList;
+    const { title, coverImageUrl, bookId } = request.body as UserBookList;
 
     try {
       await this.userService.addUserBooksService(id, {
+        bookId,
         title,
         coverImageUrl,
       });

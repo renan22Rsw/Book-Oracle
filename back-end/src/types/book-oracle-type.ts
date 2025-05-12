@@ -12,6 +12,7 @@ export interface BookOracle {
 }
 
 export interface UserBookList {
+  bookId: string;
   title: string;
   coverImageUrl: string;
 }

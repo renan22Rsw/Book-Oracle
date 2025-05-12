@@ -73,7 +73,7 @@ export class UserService {
 
   async addUserBooksService(
     userId: string,
-    { title, coverImageUrl }: UserBookList
+    { bookId, title, coverImageUrl }: UserBookList
   ) {
     try {
       const book = await db.bookList.findFirst({
@@ -89,6 +89,7 @@ export class UserService {
 
       await db.bookList.create({
         data: {
+          bookId,
           title,
           coverImageUrl,
           userId,
