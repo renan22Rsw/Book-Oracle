@@ -86,7 +86,7 @@ export class AuthController {
     const { session } = request.cookies as { session: string };
 
     try {
-      reply.clearCookie(session);
+      reply.clearCookie("session", { path: "/" });
       return reply.send({ message: "You have logged out successfully." });
     } catch (err) {
       if (err instanceof Error) {

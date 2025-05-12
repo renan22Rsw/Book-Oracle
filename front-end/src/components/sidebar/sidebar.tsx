@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sidebar,
   SidebarContent,
@@ -16,8 +18,37 @@ import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import UserMenuIcon from "../user-menu/user-icon";
 import { LogOut } from "lucide-react";
 import { ThemeButton } from "@/theme/theme-button";
+import axios, { AxiosError } from "axios";
+import { ErrorResponse } from "@/types/axios-error";
+import { GetUserToken } from "@/hooks/get-user-token";
+import { useRouter } from "next/navigation";
 
 export const AppSideBar = () => {
+  const { token } = GetUserToken();
+  const router = useRouter();
+
+  const logoutUrl = process.env.NEXT_PUBLIC_LOGOUT_URL as string;
+
+  const handleLogout = async () => {
+    try {
+      await axios.get(logoutUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
+
+      router.refresh();
+    } catch (err) {
+      const error = err as AxiosError<ErrorResponse>;
+      if (error.response) {
+        throw error.response.data.error;
+      } else {
+        throw new Error("Something went wrong");
+      }
+    }
+  };
+
   return (
     <Sidebar>
       <SidebarContent className="bg-[#E1E5E8] dark:bg-[#14181D]">
@@ -45,9 +76,9 @@ export const AppSideBar = () => {
         <div className="px-2 text-[#0f1215] dark:text-[#eaedf0]">
           <div className="flex items-center gap-x-2">
             <UserMenuIcon />
-            <h4 className="font-bold">User</h4>
+            <h4 className="font-bold">Example</h4>
           </div>
-          <span className="font-light italic">example.gmail.com</span>
+          <span className="font-light italic">example@gmail.com</span>
         </div>
         <div className="flex items-center gap-5">
           <ThemeButton
@@ -65,7 +96,7 @@ export const AppSideBar = () => {
           </ThemeButton>
         </div>
 
-        <SidebarMenuButton>
+        <SidebarMenuButton onClick={handleLogout}>
           <LogOut />
           Logout
         </SidebarMenuButton>
