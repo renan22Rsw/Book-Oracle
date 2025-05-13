@@ -109,26 +109,32 @@ export const BookPage = ({
           </div>
           <div>
             <div className="text-sm">
-              {description.replace(/<.+?>/g, " ").length > 800 ? (
-                <p>
-                  {description.replace(/<.+?>/g, "").slice(0, 800)}{" "}
-                  <span
-                    className={`${isDescriptionTooLong ? "hidden" : "inline"} cursor-pointer font-bold text-blue-800`}
-                    onClick={() =>
-                      setDescriptionToolong((description) => !description)
-                    }
-                  >
-                    Read More...
-                  </span>
-                  <span
-                    className={`${isDescriptionTooLong ? "inline" : "hidden"}`}
-                  >
-                    {" "}
-                    {description.replace(/<.+?>/g, "")}
-                  </span>
-                </p>
+              {!description ? (
+                <h3>No Description has been provided</h3>
               ) : (
-                <p>{description.replace(/<.+?>/g, "")}</p>
+                <>
+                  {description.replace(/<.+?>/g, " ").length > 800 ? (
+                    <p>
+                      {description.replace(/<.+?>/g, "").slice(0, 800)}{" "}
+                      <span
+                        className={`${isDescriptionTooLong ? "hidden" : "inline"} cursor-pointer font-bold text-blue-800`}
+                        onClick={() =>
+                          setDescriptionToolong((description) => !description)
+                        }
+                      >
+                        Read More...
+                      </span>
+                      <span
+                        className={`${isDescriptionTooLong ? "inline" : "hidden"}`}
+                      >
+                        {" "}
+                        {description.replace(/<.+?>/g, "")}
+                      </span>
+                    </p>
+                  ) : (
+                    <p>{description.replace(/<.+?>/g, "")}</p>
+                  )}
+                </>
               )}
             </div>
           </div>

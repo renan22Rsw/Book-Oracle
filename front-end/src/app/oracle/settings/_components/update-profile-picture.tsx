@@ -24,6 +24,8 @@ import {
 import { useState } from "react";
 import { ErrorResponse } from "@/types/axios-error";
 
+import NoPictureProfile from "@/public/no-user-image.png";
+
 export const UpdateProfilePicture = ({ profileImageUrl }: UserSession) => {
   const form = useForm<z.infer<typeof updateProfilePictureSchema>>({
     resolver: zodResolver(updateProfilePictureSchema),
@@ -92,7 +94,11 @@ export const UpdateProfilePicture = ({ profileImageUrl }: UserSession) => {
               <FormControl>
                 <FormLabel htmlFor="picture">
                   <Image
-                    src={pictureUrl as string}
+                    src={
+                      pictureUrl.includes("null")
+                        ? NoPictureProfile
+                        : pictureUrl
+                    }
                     width={200}
                     height={200}
                     alt="profile-picture"

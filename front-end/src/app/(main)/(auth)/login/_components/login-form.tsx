@@ -27,7 +27,7 @@ export const LoginForm = () => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
-  const signInForm = useForm<z.infer<typeof loginSchema>>({
+  const loginForm = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
@@ -64,10 +64,10 @@ export const LoginForm = () => {
   };
 
   return (
-    <Form {...signInForm}>
-      <form onSubmit={signInForm.handleSubmit(onSubmit)} className="space-y-8">
+    <Form {...loginForm}>
+      <form onSubmit={loginForm.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
-          control={signInForm.control}
+          control={loginForm.control}
           name="email"
           render={({ field }) => (
             <FormItem>
@@ -86,7 +86,7 @@ export const LoginForm = () => {
         />
 
         <FormField
-          control={signInForm.control}
+          control={loginForm.control}
           name="password"
           render={({ field }) => (
             <FormItem>
