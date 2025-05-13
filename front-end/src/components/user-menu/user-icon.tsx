@@ -1,11 +1,15 @@
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import Image from "next/image";
+import NoUserPicture from "@/public/no-user-image.png";
 
-const UserMenuIcon = () => {
+const UserMenuIcon = ({ profileImageUrl }: { profileImageUrl: string }) => {
   return (
-    <Avatar className="cursor-pointer">
-      <AvatarImage src="https://avatars.githubusercontent.com/u/178677917?v=4" />
-      <AvatarFallback>User picture</AvatarFallback>
-    </Avatar>
+    <Image
+      src={profileImageUrl ? profileImageUrl : NoUserPicture}
+      width={50}
+      height={50}
+      alt="profile-picture"
+      className="rounded-full"
+    />
   );
 };
 

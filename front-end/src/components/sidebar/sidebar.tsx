@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Sidebar,
   SidebarContent,
@@ -16,38 +14,15 @@ import Link from "next/link";
 import { sideBarItemns } from "./sidebar-items";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import UserMenuIcon from "../user-menu/user-icon";
-import { LogOut } from "lucide-react";
+
 import { ThemeButton } from "@/theme/theme-button";
-import axios, { AxiosError } from "axios";
-import { ErrorResponse } from "@/types/axios-error";
-import { GetUserToken } from "@/hooks/get-user-token";
-import { useRouter } from "next/navigation";
 
-export const AppSideBar = () => {
-  const { token } = GetUserToken();
-  const router = useRouter();
+import LogoutButton from "./logout-button";
+import { getUserSession } from "@/utils/get-user";
 
-  const logoutUrl = process.env.NEXT_PUBLIC_LOGOUT_URL as string;
-
-  const handleLogout = async () => {
-    try {
-      await axios.get(logoutUrl, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      });
-
-      router.refresh();
-    } catch (err) {
-      const error = err as AxiosError<ErrorResponse>;
-      if (error.response) {
-        throw error.response.data.error;
-      } else {
-        throw new Error("Something went wrong");
-      }
-    }
-  };
+export const AppSideBar = async () => {
+  const session = await getUserSession();
+  const pictureUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${session?.profileImageUrl}`;
 
   return (
     <Sidebar>
@@ -75,10 +50,10 @@ export const AppSideBar = () => {
       <SidebarFooter className="bg-[#E1E5E8] dark:bg-[#14181D]">
         <div className="px-2 text-[#0f1215] dark:text-[#eaedf0]">
           <div className="flex items-center gap-x-2">
-            <UserMenuIcon />
-            <h4 className="font-bold">Example</h4>
+            <UserMenuIcon profileImageUrl={pictureUrl as string} />
+            <h4 className="font-bold">{session?.username}</h4>
           </div>
-          <span className="font-light italic">example@gmail.com</span>
+          <span className="font-light italic">{session?.email}</span>
         </div>
         <div className="flex items-center gap-5">
           <ThemeButton
@@ -95,11 +70,7 @@ export const AppSideBar = () => {
             <MoonIcon className="text-[#eaedf0] dark:text-[#0f1215]" />
           </ThemeButton>
         </div>
-
-        <SidebarMenuButton onClick={handleLogout}>
-          <LogOut />
-          Logout
-        </SidebarMenuButton>
+        <LogoutButton />
       </SidebarFooter>
     </Sidebar>
   );

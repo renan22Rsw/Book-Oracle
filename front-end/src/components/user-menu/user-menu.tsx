@@ -13,23 +13,24 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import {
-  Settings,
-  Contrast,
-  MoonIcon,
-  SunIcon,
-  LogOut,
-  Clipboard,
-} from "lucide-react";
+import { Settings, Contrast, MoonIcon, SunIcon, Clipboard } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ThemeButton } from "@/theme/theme-button";
+import NoPictureProfile from "@/public/no-user-image.png";
+import { LogoutButton } from "./logout-button";
 
-export const UserMenu = () => {
+export const UserMenu = ({ profileImageUrl }: { profileImageUrl: string }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer">
-          <AvatarImage src="https://avatars.githubusercontent.com/u/178677917?v=4" />
+          <AvatarImage
+            src={
+              profileImageUrl
+                ? profileImageUrl
+                : (NoPictureProfile as unknown as string)
+            }
+          />
           <AvatarFallback>User picture</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
@@ -90,10 +91,7 @@ export const UserMenu = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuItem>
-          <Button variant={"ghost"}>
-            <LogOut />
-            Log out
-          </Button>
+          <LogoutButton />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

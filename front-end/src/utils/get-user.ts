@@ -9,7 +9,7 @@ export const getUserSession = async () => {
   const userProfileUrl = process.env.NEXT_PUBLIC_USER_PROFILE as string;
 
   if (!session) {
-    throw new Error("Unathorized");
+    return null;
   }
 
   try {
