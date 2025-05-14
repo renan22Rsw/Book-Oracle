@@ -76,7 +76,7 @@ export const BookPage = ({
     <div className="mx-auto h-full max-w-[1000px] rounded-md bg-[#E1E5E8] p-4 dark:bg-[#14181D] xl:my-20 xl:h-auto">
       <div className="xl:flex">
         <div className="flex w-full flex-col items-center space-y-4 md:items-start">
-          {covers.small ? (
+          {covers ? (
             <Image
               src={covers.small}
               width={300}

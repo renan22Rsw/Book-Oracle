@@ -1,6 +1,5 @@
 import {
   HomeIcon,
-  PersonIcon,
   GearIcon,
   ClipboardIcon,
   MagnifyingGlassIcon,
@@ -23,27 +22,20 @@ export const sideBarItemns: sideBarItemsTypes[] = [
 
   {
     id: 2,
-    item: "About us",
-    href: "/about-us",
-    icon: <PersonIcon />,
-  },
-
-  {
-    id: 3,
     item: "Ask the oracle",
     href: "/oracle/ask-oracle",
     icon: <MagnifyingGlassIcon />,
   },
 
   {
-    id: 4,
+    id: 3,
     item: "My list",
     href: "/oracle/list",
     icon: <ClipboardIcon />,
   },
 
   {
-    id: 5,
+    id: 4,
     item: "Settings",
     href: "/oracle/settings",
     icon: <GearIcon />,

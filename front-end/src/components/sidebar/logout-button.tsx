@@ -5,6 +5,7 @@ import { ErrorResponse } from "@/types/axios-error";
 import axios, { AxiosError } from "axios";
 import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Button } from "../ui/button";
 
 const LogoutButton = () => {
   const { token } = GetUserToken();
@@ -32,10 +33,12 @@ const LogoutButton = () => {
   };
 
   return (
-    <span className="flex cursor-pointer gap-x-2 py-2" onClick={handleLogout}>
-      <LogOut />
-      Logout
-    </span>
+    <Button variant={"ghost"} onClick={handleLogout}>
+      <span className="flex w-full items-center gap-x-2">
+        <LogOut />
+        Logout
+      </span>
+    </Button>
   );
 };
 

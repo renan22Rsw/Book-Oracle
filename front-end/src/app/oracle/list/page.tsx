@@ -8,9 +8,9 @@ const MyList = async () => {
 
   return (
     <MyListPage
-      username={session.username as string}
-      email={session.email as string}
-      userPicture={session.profileImageUrl as string}
+      username={session?.username as string}
+      email={session?.email as string}
+      userPicture={session?.profileImageUrl as string}
       books={books}
     />
   );

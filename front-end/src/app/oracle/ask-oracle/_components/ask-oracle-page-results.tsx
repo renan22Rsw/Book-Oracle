@@ -21,14 +21,20 @@ export const AskOraclePageResults = ({
     <div className="mt-4 rounded-md bg-[#E1E5E8] py-4 dark:bg-[#171B1E]">
       <div className="text- flex w-[370px] items-center justify-between sm:w-[400px] md:w-[500px] lg:w-[650px]">
         <div className="flex items-center px-2">
-          <Image
-            src={covers?.smallThumbnail ? covers?.smallThumbnail : ""}
-            width={50}
-            height={50}
-            alt="book-cover"
-            priority={true}
-            className="h-auto w-auto"
-          />
+          {covers ? (
+            <Image
+              src={covers.smallThumbnail}
+              width={50}
+              height={50}
+              alt="book-cover"
+              priority={true}
+              className="h-auto w-auto"
+            />
+          ) : (
+            <div className="flex h-[98px] w-[63px] items-center justify-center bg-[#eaedf0] dark:bg-[#0F1215]">
+              <h2 className="text-center font-bold">No cover</h2>
+            </div>
+          )}
           <div className="space-y-0.5 px-4">
             <h3 className="cursor-pointer">{title}</h3>
             <p className="text-xs italic">
