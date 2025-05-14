@@ -10,7 +10,7 @@ export const NavBar = async () => {
   const pictureUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${session?.profileImageUrl}`;
 
   return (
-    <nav className="hidden w-full items-center justify-between bg-transparent px-4 py-6 font-semibold text-foreground lg:flex">
+    <nav className="hidden w-full items-center justify-between bg-transparent px-4 py-6 font-semibold text-foreground xl:flex">
       <ul className="flex items-center">
         {navbarItems.map(({ id, item, href }) => (
           <Link key={id} href={href} className="cursor-pointer">

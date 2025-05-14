@@ -30,22 +30,20 @@ export const HomePageMobile = () => {
         </p>
 
         <div>
-          <Link href={"/oracle/ask-oracle"} className="">
+          <Link href={"/oracle/ask-oracle"}>
             <button className="h-10 w-[100px] rounded-sm bg-[#3f4e5a] font-bold text-[#eaedf0] dark:bg-[#a5b4c0] dark:text-[#0f1215]">
               Get Started
             </button>
           </Link>
         </div>
 
-        <div className="flex items-center justify-center">
-          <Image
-            src={HomeImage}
-            alt="home-page-image"
-            width={430}
-            height={430}
-            style={{ width: "auto", height: "auto" }}
-          />
-        </div>
+        <Image
+          src={HomeImage}
+          alt="home-page-image"
+          width={430}
+          height={430}
+          style={{ width: "auto", height: "auto" }}
+        />
       </div>
     </div>
   );

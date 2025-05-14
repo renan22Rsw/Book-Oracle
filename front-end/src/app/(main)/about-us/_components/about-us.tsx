@@ -12,7 +12,10 @@ const firaSansCondensed = Fira_Sans_Condensed({
 
 export const AboutUs = () => {
   return (
-    <div className="flex h-screen w-full">
+    <div
+      className="flex h-screen w-full bg-[#D8DBED] dark:bg-[#121427]"
+      id="about-us"
+    >
       <div className="flex h-[450px] flex-col justify-center px-8 text-[#0f1215] dark:text-[#eaedf0]">
         <h1 className={`${firaSans.className} text-8xl text-shadow`}>
           About us
