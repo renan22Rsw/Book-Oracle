@@ -22,7 +22,6 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 export const LoginForm = () => {
-  const loginUrl = process.env.NEXT_PUBLIC_LOGIN_URL as string;
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
@@ -42,7 +41,7 @@ export const LoginForm = () => {
     startTransition(() => {
       axios
         .post(
-          loginUrl,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`,
           {
             email,
             password,

@@ -14,25 +14,16 @@ import {
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { Settings, Contrast, MoonIcon, SunIcon, Clipboard } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ThemeButton } from "@/theme/theme-button";
-import NoPictureProfile from "@/public/no-user-image.png";
+
 import { LogoutButton } from "./logout-button";
+import UserMenuIcon from "./user-icon";
 
 export const UserMenu = ({ profileImageUrl }: { profileImageUrl: string }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Avatar className="cursor-pointer">
-          <AvatarImage
-            src={
-              profileImageUrl
-                ? profileImageUrl
-                : (NoPictureProfile as unknown as string)
-            }
-          />
-          <AvatarFallback>User picture</AvatarFallback>
-        </Avatar>
+        <UserMenuIcon profileImageUrl={profileImageUrl} />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>

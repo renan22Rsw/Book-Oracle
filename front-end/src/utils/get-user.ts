@@ -6,7 +6,6 @@ import { cookies } from "next/headers";
 export const getUserSession = async () => {
   const token = cookies();
   const session = token.get("session")?.value;
-  const userProfileUrl = process.env.NEXT_PUBLIC_USER_PROFILE as string;
 
   if (!session) {
     return null;
@@ -14,7 +13,7 @@ export const getUserSession = async () => {
 
   try {
     const response: AxiosResponse<UserSession> = await axios.get(
-      userProfileUrl,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/user/profile`,
       {
         headers: {
           Authorization: `Bearer ${session}`,

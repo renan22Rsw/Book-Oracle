@@ -23,7 +23,6 @@ import { AuthErrorMessage } from "../../_components/auth-error-message";
 import { ErrorResponse } from "@/types/axios-error";
 
 export const SignInForm = () => {
-  const signupUrl = process.env.NEXT_PUBLIC_SIGNUP_URL as string;
   const [message, setMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [isPending, startTransition] = useTransition();
@@ -44,7 +43,7 @@ export const SignInForm = () => {
     setErrorMessage("");
     startTransition(() => {
       axios
-        .post(signupUrl, {
+        .post(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/signup`, {
           username,
           email,
           password,

@@ -9,12 +9,11 @@ import { Button } from "../ui/button";
 
 const LogoutButton = () => {
   const { token } = GetUserToken();
-  const logoutUrl = process.env.NEXT_PUBLIC_LOGOUT_URL as string;
   const router = useRouter();
 
   const handleLogout = async () => {
     try {
-      await axios.get(logoutUrl, {
+      await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/logout`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

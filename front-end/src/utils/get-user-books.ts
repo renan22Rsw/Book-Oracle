@@ -6,14 +6,13 @@ import { cookies } from "next/headers";
 export const getUserBooks = async () => {
   const cookie = cookies();
   const session = cookie.get("session")?.value;
-  const userBooksUrl = process.env.NEXT_PUBLIC_USER_BOOKS as string;
 
   if (!session) {
     throw new Error("Unathorized");
   }
   try {
     const response: AxiosResponse<UserOracleBooks[]> = await axios.get(
-      userBooksUrl,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/user/list`,
       {
         headers: {
           Authorization: `Bearer ${session}`,

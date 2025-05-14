@@ -44,7 +44,6 @@ export const AskOraclePage = () => {
     };
   }
 
-  const bookOracleUrl = process.env.NEXT_PUBLIC_BOOK_ORACLE_URL as string;
   const { token } = GetUserToken();
   const [books, setBooks] = useState<AskOracleState[]>([]);
   const [isPending, startTransition] = useTransition();
@@ -54,7 +53,7 @@ export const AskOraclePage = () => {
     startTransition(async () => {
       try {
         const response: AxiosResponse<AskBookOracle> = await axios.get(
-          bookOracleUrl,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/oracle/results`,
           {
             params: { description },
             headers: {

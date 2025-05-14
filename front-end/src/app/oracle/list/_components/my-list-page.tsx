@@ -29,14 +29,14 @@ export const MyListPage = ({
   books,
 }: MyListPageProps) => {
   const pictureUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${userPicture}`;
-  const userBooksUrl = process.env.NEXT_PUBLIC_USER_BOOKS as string;
+
   const { token } = GetUserToken();
   const router = useRouter();
 
   const handleDeleteBook = async (id: string, title: string) => {
     try {
       const response: AxiosResponse = await axios.delete(
-        `${userBooksUrl}/${id}`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/user/list/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

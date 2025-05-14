@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { navbarItems } from "./navbar-items";
-// import { UserMenu } from "../user-menu/user-menu";
 import { Button } from "../ui/button";
 import { getUserSession } from "@/utils/get-user";
 import { UserMenu } from "../user-menu/user-menu";

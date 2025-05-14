@@ -37,7 +37,6 @@ export const UpdateProfileForm = ({ username, email }: UserSession) => {
     },
   });
 
-  const userSettingUrl = process.env.NEXT_PUBLIC_UPDATE_SETTINGS as string;
   const [disabledEmail, setEmail] = useState<boolean>(true);
   const [disabledUsername, setUsername] = useState<boolean>(true);
   const [disabledPassword, setPassword] = useState<boolean>(true);
@@ -53,7 +52,7 @@ export const UpdateProfileForm = ({ username, email }: UserSession) => {
 
     try {
       const response: AxiosResponse = await axios.put(
-        userSettingUrl,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/user/settings`,
         {
           username,
           email,

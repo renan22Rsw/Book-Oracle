@@ -28,7 +28,6 @@ export const BookPage = ({
   const [isDescriptionTooLong, setDescriptionToolong] =
     useState<boolean>(false);
 
-  const addOralceBookUrl = process.env.NEXT_PUBLIC_ADD_ORACLE_BOOK as string;
   const { token } = GetUserToken();
   const [isPending, startTransition] = useTransition();
 
@@ -36,7 +35,7 @@ export const BookPage = ({
     startTransition(async () => {
       try {
         const response = await axios.post(
-          addOralceBookUrl,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/user/list`,
           {
             bookId,
             title,

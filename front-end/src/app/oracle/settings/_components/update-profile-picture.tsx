@@ -34,8 +34,6 @@ export const UpdateProfilePicture = ({ profileImageUrl }: UserSession) => {
     },
   });
 
-  const updateProfileUrl = process.env
-    .NEXT_PUBLIC_UPDATE_PROFILE_PICTURE as string;
   const { token } = GetUserToken();
   const [successMsg, setSuccessMsg] = useState<string>("");
   const [errorMsg, setErrorMsg] = useState<string>("");
@@ -56,7 +54,7 @@ export const UpdateProfilePicture = ({ profileImageUrl }: UserSession) => {
 
     try {
       const response = await axios.patch(
-        updateProfileUrl,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/user/settings/profile-picture`,
         formData,
 
         {
