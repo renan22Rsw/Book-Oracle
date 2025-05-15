@@ -22,7 +22,6 @@ import { getUserSession } from "@/utils/get-user";
 
 export const AppSideBar = async () => {
   const session = await getUserSession();
-  const pictureUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${session?.profileImageUrl}`;
 
   return (
     <Sidebar>
@@ -50,7 +49,9 @@ export const AppSideBar = async () => {
       <SidebarFooter className="bg-[#E1E5E8] dark:bg-[#14181D]">
         <div className="px-2 text-[#0f1215] dark:text-[#eaedf0]">
           <div className="flex items-center gap-x-2">
-            <UserMenuIcon profileImageUrl={pictureUrl as string} />
+            <UserMenuIcon
+              profileImageUrl={session?.profileImageUrl as string}
+            />
             <h4 className="font-bold">{session?.username}</h4>
           </div>
           <span className="font-light italic">{session?.email}</span>

@@ -6,7 +6,6 @@ import { UserMenu } from "../user-menu/user-menu";
 
 export const NavBar = async () => {
   const session = await getUserSession();
-  const pictureUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${session?.profileImageUrl}`;
 
   return (
     <nav className="hidden w-full items-center justify-between bg-transparent px-4 py-6 font-semibold text-foreground xl:flex">
@@ -18,7 +17,7 @@ export const NavBar = async () => {
         ))}
       </ul>
       {session ? (
-        <UserMenu profileImageUrl={pictureUrl as string} />
+        <UserMenu profileImageUrl={session.profileImageUrl as string} />
       ) : (
         <div className="space-x-4">
           <Link href={"/sign-up"}>

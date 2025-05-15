@@ -7,8 +7,8 @@ const nextConfig = {
         hostname: "avatars.githubusercontent.com",
       },
       {
-        protocol: "http",
-        hostname: "localhost",
+        protocol: "https",
+        hostname: "res.cloudinary.com",
       },
       {
         protocol: "http",

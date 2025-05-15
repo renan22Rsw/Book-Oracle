@@ -6,6 +6,7 @@ import fs from "fs";
 import path from "path";
 import { pipeline } from "stream/promises";
 import { UserBookList } from "../types/book-oracle-type";
+import { uploadProfilePicture } from "../utils/upload-profile-picture";
 
 export class UserController {
   constructor(private userService: UserService) {}
@@ -64,30 +65,26 @@ export class UserController {
   ) {
     const parts = request.parts();
     const { id } = request.user as { id: string };
-    let imageFileName = "";
+    let imageUrl = "";
 
     try {
       for await (const part of parts) {
         if (part.type === "file") {
           const fileName = `${Date.now()}-${part.filename}`;
-          const uploadDir = path.join(__dirname, "..", "uploads");
+          const chunks: Buffer[] = [];
 
-          await fs.promises.mkdir(uploadDir, { recursive: true });
+          for await (const chunk of part.file) {
+            chunks.push(chunk);
+          }
 
-          const filePath = path.join(uploadDir, fileName);
-
-          await pipeline(part.file, fs.createWriteStream(filePath));
-
-          imageFileName = fileName;
+          const buffer = Buffer.concat(chunks);
+          const result = await uploadProfilePicture(buffer, fileName);
+          imageUrl = result.secure_url;
+          await this.userService.updateProfilePictureService(id, imageUrl);
         }
-
-        await this.userService.updateProfilePictureService(
-          id,
-          `/uploads/${imageFileName}`
-        );
       }
 
-      if (!imageFileName) {
+      if (!imageUrl) {
         return reply.code(400).send({ error: "No image has been uploaded" });
       }
 

@@ -28,8 +28,6 @@ export const MyListPage = ({
   userPicture,
   books,
 }: MyListPageProps) => {
-  const pictureUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${userPicture}`;
-
   const { token } = GetUserToken();
   const router = useRouter();
 
@@ -68,7 +66,7 @@ export const MyListPage = ({
     <div className="h-full space-y-4 bg-[#E1E5E8] dark:bg-[#14181D]">
       <div className="flex flex-col items-center space-y-2">
         <Image
-          src={pictureUrl.includes("null") ? NoPictureProfile : pictureUrl}
+          src={userPicture ? userPicture : NoPictureProfile}
           width={200}
           height={200}
           alt="profile-pictrue"

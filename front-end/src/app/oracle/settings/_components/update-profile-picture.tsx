@@ -75,8 +75,6 @@ export const UpdateProfilePicture = ({ profileImageUrl }: UserSession) => {
     }
   }
 
-  const pictureUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${profileImageUrl}`;
-
   return (
     <Form {...form}>
       <form
@@ -92,11 +90,7 @@ export const UpdateProfilePicture = ({ profileImageUrl }: UserSession) => {
               <FormControl>
                 <FormLabel htmlFor="picture">
                   <Image
-                    src={
-                      pictureUrl.includes("null")
-                        ? NoPictureProfile
-                        : pictureUrl
-                    }
+                    src={profileImageUrl ? profileImageUrl : NoPictureProfile}
                     width={200}
                     height={200}
                     alt="profile-picture"
