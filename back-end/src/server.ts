@@ -38,7 +38,8 @@ fastify.register(oralceRoutes);
 
 const start = async () => {
   try {
-    await fastify.listen({ port: 8000 });
+    const port = process.env.PORT ? Number(process.env.PORT) : 8000;
+    await fastify.listen({ port, host: "0.0.0.0" });
   } catch (err) {
     await fastify.log.error(err);
     process.exit(1);
