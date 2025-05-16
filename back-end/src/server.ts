@@ -11,6 +11,8 @@ import { oralceRoutes } from "./routes/oracle-routes";
 
 dotenv.config();
 
+const port = Number(process.env.PORT) || 8000;
+
 const fastify = Fastify({
   logger: true,
 });
@@ -36,14 +38,12 @@ fastify.register(authRoutes);
 fastify.register(userRoutes);
 fastify.register(oralceRoutes);
 
-const start = async () => {
-  try {
-    const port = process.env.PORT ? Number(process.env.PORT) : 8000;
-    await fastify.listen({ port, host: "0.0.0.0" });
-  } catch (err) {
-    await fastify.log.error(err);
+fastify
+  .listen({ port, host: "0.0.0.0" })
+  .then(() => {
+    console.log(`Server is running on port ${port}`);
+  })
+  .catch((err) => {
+    fastify.log.error(err);
     process.exit(1);
-  }
-};
-
-start();
+  });
