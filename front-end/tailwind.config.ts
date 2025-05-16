@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { PluginAPI } from "tailwindcss/types/config";
 
 const config: Config = {
   darkMode: ["class"],
@@ -86,7 +87,13 @@ const config: Config = {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     require("tailwindcss-animate"),
 
-    function ({ matchUtilities, theme }) {
+    function ({
+      matchUtilities,
+      theme,
+    }: {
+      matchUtilities: PluginAPI["matchComponents"];
+      theme: PluginAPI["theme"];
+    }) {
       matchUtilities(
         {
           "text-shadow": (value: string) => ({
