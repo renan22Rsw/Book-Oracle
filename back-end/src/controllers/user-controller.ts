@@ -2,9 +2,6 @@ import { UserService } from "../services/user-service";
 import { FastifyRequest, FastifyReply } from "fastify";
 import { signUpSchema as userSchema } from "../schemas/auth-schemas";
 
-import fs from "fs";
-import path from "path";
-import { pipeline } from "stream/promises";
 import { UserBookList } from "../types/book-oracle-type";
 import { uploadProfilePicture } from "../utils/upload-profile-picture";
 

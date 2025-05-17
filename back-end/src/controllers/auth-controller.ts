@@ -62,13 +62,11 @@ export class AuthController {
         { expiresIn: "1d" }
       );
 
-      const isProduction = process.env.NODE_ENV === "production";
-
       reply.setCookie("session", token, {
         path: "/",
         httpOnly: true,
-        secure: isProduction,
-        sameSite: isProduction ? "none" : "lax",
+        secure: true,
+        sameSite: "none",
         maxAge: 60 * 60 * 24,
       });
 
