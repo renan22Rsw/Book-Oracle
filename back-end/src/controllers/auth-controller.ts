@@ -62,10 +62,6 @@ export class AuthController {
         { expiresIn: "1d" }
       );
 
-      const domain = process.env.DOMAIN;
-
-      console.log(domain);
-
       reply.setCookie("session", token, {
         path: "/",
         httpOnly: true,
@@ -73,7 +69,6 @@ export class AuthController {
         sameSite: "none",
         maxAge: 60 * 60 * 24,
         partitioned: true,
-        domain: domain,
       });
 
       return reply.code(201).send({
