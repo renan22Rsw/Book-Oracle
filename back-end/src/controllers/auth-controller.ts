@@ -68,6 +68,7 @@ export class AuthController {
         secure: true,
         sameSite: "none",
         maxAge: 60 * 60 * 24,
+        partitioned: true,
       });
 
       return reply.code(201).send({
