@@ -52,7 +52,7 @@ export const UpdateProfileForm = ({ username, email }: UserSession) => {
 
     try {
       const response: AxiosResponse = await axios.put(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/user/settings`,
+        "/api/user/settings",
         {
           username,
           email,

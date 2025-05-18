@@ -54,7 +54,7 @@ export const UpdateProfilePicture = ({ profileImageUrl }: UserSession) => {
 
     try {
       const response = await axios.patch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/user/settings/profile-picture`,
+        "/api/user/settings/profile-picture",
         formData,
 
         {

@@ -53,7 +53,7 @@ export const AskOraclePage = () => {
     startTransition(async () => {
       try {
         const response: AxiosResponse<AskBookOracle> = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/oracle/results`,
+          "/api/oracle/results",
           {
             params: { description },
             headers: {

@@ -35,7 +35,7 @@ export const BookPage = ({
     startTransition(async () => {
       try {
         const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/user/list`,
+          "/api/user/list",
           {
             bookId,
             title,

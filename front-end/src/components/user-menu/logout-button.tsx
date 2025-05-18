@@ -13,7 +13,7 @@ export const LogoutButton = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/logout`, {
+      await axios.get("/api/auth/logout", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

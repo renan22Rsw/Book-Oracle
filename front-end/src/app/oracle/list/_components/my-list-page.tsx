@@ -34,7 +34,7 @@ export const MyListPage = ({
   const handleDeleteBook = async (id: string, title: string) => {
     try {
       const response: AxiosResponse = await axios.delete(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/user/list/${id}`,
+        `/api/user/list/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
