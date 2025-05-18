@@ -41,7 +41,7 @@ export const LoginForm = () => {
     startTransition(() => {
       axios
         .post(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`,
+          "api/auth/login",
           {
             email,
             password,
@@ -53,7 +53,9 @@ export const LoginForm = () => {
             withCredentials: true,
           },
         )
-        .then(() => router.push("/oracle/ask-oracle"))
+        .then(() => {
+          router.push("/oracle/ask-oracle");
+        })
         .catch((err) => {
           const error = err as AxiosError<ErrorResponse>;
           if (error.response) {

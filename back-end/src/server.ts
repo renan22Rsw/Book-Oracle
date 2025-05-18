@@ -24,8 +24,6 @@ fastify.register(cors, {
   credentials: true,
 });
 
-console.log(process.env.ORIGIN_URL);
-
 fastify.register(jwt, {
   secret: process.env.JWT_SECRET_KEY as string,
 });
