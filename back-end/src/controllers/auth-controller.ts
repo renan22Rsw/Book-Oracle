@@ -66,7 +66,6 @@ export class AuthController {
         path: "/",
         httpOnly: true,
         secure: true,
-        sameSite: "none",
         maxAge: 60 * 60 * 24,
         partitioned: true,
       });
