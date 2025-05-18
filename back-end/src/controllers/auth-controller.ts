@@ -65,9 +65,9 @@ export class AuthController {
       reply.setCookie("session", token, {
         path: "/",
         httpOnly: true,
+        sameSite: "none",
         secure: true,
         maxAge: 60 * 60 * 24,
-        partitioned: true,
       });
 
       return reply.code(201).send({
