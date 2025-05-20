@@ -54,7 +54,7 @@ export const LoginForm = () => {
           },
         )
         .then(() => {
-          router.push("/oracle/ask-oracle");
+          router.refresh();
         })
         .catch((err) => {
           const error = err as AxiosError<ErrorResponse>;

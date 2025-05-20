@@ -21,11 +21,13 @@ import { useState, useTransition } from "react";
 import { AuthMessage } from "../../_components/auth-message";
 import { AuthErrorMessage } from "../../_components/auth-error-message";
 import { ErrorResponse } from "@/types/axios-error";
+import { useRouter } from "next/navigation";
 
 export const SignInForm = () => {
   const [message, setMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const signInForm = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
@@ -43,7 +45,7 @@ export const SignInForm = () => {
     setErrorMessage("");
     startTransition(() => {
       axios
-        .post(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/signup`, {
+        .post("api/auth/signup", {
           username,
           email,
           password,
@@ -52,6 +54,9 @@ export const SignInForm = () => {
         .then((res) => {
           const response = res as AxiosResponse;
           setMessage(response.data.message);
+          setTimeout(() => {
+            router.push("/login");
+          }, 2000);
         })
         .catch((err) => {
           const error = err as AxiosError<ErrorResponse>;

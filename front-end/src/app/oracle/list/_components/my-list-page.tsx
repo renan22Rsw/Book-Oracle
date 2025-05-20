@@ -12,7 +12,6 @@ import { useRouter } from "next/navigation";
 
 interface MyListPageProps {
   username: string;
-  email: string;
   userPicture: string | null;
   books: {
     id: string;
@@ -24,7 +23,6 @@ interface MyListPageProps {
 
 export const MyListPage = ({
   username,
-  email,
   userPicture,
   books,
 }: MyListPageProps) => {
@@ -73,7 +71,6 @@ export const MyListPage = ({
           className="mt-10 rounded-full"
         />
         <h3 className="text-3xl font-bold">{username}</h3>
-        <span className="text-2xl font-light italic">{email}</span>
       </div>
       <div className="flex flex-col items-center justify-center p-4">
         {books.map(({ id, bookId, title, coverImageUrl }) => (
