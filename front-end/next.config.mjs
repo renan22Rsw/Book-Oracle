@@ -21,7 +21,7 @@ const nextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "https://book-oracle-production.up.railway.app/:path*",
+        destination: `${process.env.BACKEND_URL}/:path*`, // Proxy to Backend
       },
     ];
   },
